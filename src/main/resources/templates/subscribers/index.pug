@@ -1,0 +1,24 @@
+extends ../layouts/default
+
+block content
+    h1 MIRA Jeugdkern Mailinglijst
+
+    p Schrijf je in op onze mailinglijst en dan houden wij je op de hoogte van het doen en laten van de Jeugdkern. Op deze manier mis je geen enkele activiteit!
+
+    form.pure-form.pure-form-stacked#subscription_form(method="POST", action="")
+        label(for="email") E-mailadres
+        input(type="text", id="email" value="", name="email")
+
+        label(for="voornaam") Voornaam
+        input(type="text", id="voornaam", value="", name="voornaam")
+
+        label(for="achternaam") Achternaam
+        input(type="text", id="achternaam", value="", name="achternaam")
+
+        button.pure-button.pure-button-primary(type="submit") Inschrijven
+
+
+    ul.hints
+        li Om er zeker van te zijn dat je geen robot bent, sturen we je na je inschrijving een e-mailbericht met een activatiecode.
+        li Je kan op ieder moment uitschrijven via deze link:
+            a(href="subscribers/unsubscribe") Uitschrijven

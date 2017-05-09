@@ -1,0 +1,13 @@
+extends ../layouts/default
+
+//Inschrijving Bevestigen
+
+block content
+    h1 Inschrijving Bevestigen
+    p Kopieeër de activatiecode in onderstaand tekstveld.
+
+    form.pure-form.pure-form-stacked(method="POST")
+        label(for="token") Activatiecode
+        input(id="token", name="token", type="text", required)
+
+        button.pure-button.pure-button-primary(type="submit") Bevestigen
