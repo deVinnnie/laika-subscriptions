@@ -1,10 +1,11 @@
 package be.mira.jongeren.mailinglist.domain;
 
+import be.mira.jongeren.mailinglist.util.date.Past;
 import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
-import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 
 @Entity
@@ -23,22 +24,26 @@ public class Subscriber {
     @Email
     private String email;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Past
-    private Calendar subscriptionDate;
+    private LocalDateTime subscriptionDate;
 
     private Boolean active = false;
 
     @Size(max=16)
     private String token;
 
-    public Subscriber() {
+    public Subscriber(){
+        this.subscriptionDate = LocalDateTime.now();
     }
 
-    public Subscriber(String voornaam, String achternaam, String email, Calendar subscriptionDate) {
+    public Subscriber(String voornaam, String achternaam, String email) {
+        this();
         this.voornaam = voornaam;
         this.achternaam = achternaam;
         this.email = email;
+    }
+
+    public Subscriber(String voornaam, String achternaam, String email, LocalDateTime subscriptionDate) {
+        this(voornaam, achternaam, email);
         this.subscriptionDate = subscriptionDate;
     }
 
@@ -74,11 +79,11 @@ public class Subscriber {
         this.email = email;
     }
 
-    public Calendar getSubscriptionDate() {
+    public LocalDateTime getSubscriptionDate() {
         return subscriptionDate;
     }
 
-    public void setSubscriptionDate(Calendar subscriptionDate) {
+    public void setSubscriptionDate(LocalDateTime subscriptionDate) {
         this.subscriptionDate = subscriptionDate;
     }
 

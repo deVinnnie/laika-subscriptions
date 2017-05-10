@@ -5,6 +5,7 @@ import be.mira.jongeren.mailinglist.repository.SubscriberRepository;
 import be.mira.jongeren.mailinglist.util.TokenGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.time.LocalDateTime;
 import java.util.Calendar;
 
 public class SubscriberServiceImpl implements SubscriberService {
@@ -24,7 +25,7 @@ public class SubscriberServiceImpl implements SubscriberService {
 
     public void subscribe(Subscriber subscriber){
         // Set the current date as subscription date.
-        subscriber.setSubscriptionDate(Calendar.getInstance());
+        subscriber.setSubscriptionDate(LocalDateTime.now());
 
         // Generate token
         String token = tokenGenerator.generate();

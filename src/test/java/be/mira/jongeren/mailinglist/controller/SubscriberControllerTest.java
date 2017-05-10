@@ -52,7 +52,7 @@ public class SubscriberControllerTest extends MockMvcTest {
     @Test
     public void activateSubscriberWithCorrectTokenChangesState() throws Exception{
         // Prepare test subscriber.
-        Subscriber subscriber = new Subscriber("Luke", "Skywalker", "luke.skywalker@rebellion.org", Calendar.getInstance());
+        Subscriber subscriber = new Subscriber("Luke", "Skywalker", "luke.skywalker@rebellion.org");
         subscriber.setToken("aaaabbbbccccdddd");
         subscriberRepository.save(subscriber);
 
@@ -73,7 +73,7 @@ public class SubscriberControllerTest extends MockMvcTest {
     @Test
     public void activateSubscriberWithInCorrectTokenIsRejected() throws Exception{
         // Prepare test subscriber.
-        Subscriber subscriber = new Subscriber("Luke", "Skywalker", "luke.skywalker@rebellion.org", Calendar.getInstance());
+        Subscriber subscriber = new Subscriber("Luke", "Skywalker", "luke.skywalker@rebellion.org");
         subscriber.setToken("aaaabbbbccccdddd");
         subscriberRepository.save(subscriber);
 
@@ -94,7 +94,7 @@ public class SubscriberControllerTest extends MockMvcTest {
     @Test
     public void activateSubscriberWithTokenSizeLongerThan16IsRejected() throws Exception{
         // Prepare test subscriber.
-        Subscriber subscriber = new Subscriber("Luke", "Skywalker", "luke.skywalker@rebellion.org", Calendar.getInstance());
+        Subscriber subscriber = new Subscriber("Luke", "Skywalker", "luke.skywalker@rebellion.org");
         subscriberRepository.save(subscriber);
 
         // Enter activation token.
@@ -114,7 +114,7 @@ public class SubscriberControllerTest extends MockMvcTest {
     @Test
     public void activateSubscriberWithEmptyTokenIsRejected() throws Exception{
         // Prepare test subscriber.
-        Subscriber subscriber = new Subscriber("Luke", "Skywalker", "luke.skywalker@rebellion.org", Calendar.getInstance());
+        Subscriber subscriber = new Subscriber("Luke", "Skywalker", "luke.skywalker@rebellion.org");
         subscriberRepository.save(subscriber);
 
         // Enter activation token.
