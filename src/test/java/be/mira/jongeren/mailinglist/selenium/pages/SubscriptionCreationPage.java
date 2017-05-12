@@ -1,11 +1,15 @@
 package be.mira.jongeren.mailinglist.selenium.pages;
 
 import org.apache.commons.jexl2.introspection.SandboxUberspectImpl;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class SubscriptionCreationPage extends PageObject{
+
+    public static String SUBSCRIPTIONLIST_MAIN_SEQUENCE = "main-sequence";
+    public static String SUBSCRIPTIONLIST_SUPERNOVA = "supernova";
 
     @FindBy(name = "voornaam")
     private WebElement firstNameInputElement;
@@ -35,6 +39,11 @@ public class SubscriptionCreationPage extends PageObject{
 
     public SubscriptionCreationPage enterEmailAddresss(String emailAddress){
         emailAddressInputElement.sendKeys(emailAddress);
+        return this;
+    }
+
+    public SubscriptionCreationPage checkSubscriptionList(String list) {
+        driver().findElement(By.id("list-"+list)).click();
         return this;
     }
 

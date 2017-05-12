@@ -7,15 +7,14 @@ import be.mira.jongeren.mailinglist.repository.SubscriberRepository;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.ResultMatcher;
 
 import java.util.Calendar;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.IsEqual.equalTo;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -35,11 +34,10 @@ public class SubscriberControllerTest extends MockMvcTest {
                                 .param("voornaam", "Luke")
                                 .param("achternaam", "Skywalker")
                                 .param("email", "luke.skywalker@rebellion.org")
+                                .param("lists", "main-sequence", "supernova")
                                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 )
-                .andExpect(
-                    status().is3xxRedirection()
-                );
+                .andExpect(status().is3xxRedirection());
 
         assertThat(subscriberRepository.findAll(), hasSize(equalTo(1)));
 
@@ -47,6 +45,22 @@ public class SubscriberControllerTest extends MockMvcTest {
 
         assertFalse(persistedSubscriber.isActive());
         assertNotNull(persistedSubscriber.getToken());
+    }
+
+    @Test
+    public void addSubscriberWithoutSubscriptionLists() throws Exception {
+        mockMvc()
+                .perform(
+                        post("/")
+                                .param("voornaam", "Luke")
+                                .param("achternaam", "Skywalker")
+                                .param("email", "luke.skywalker@rebellion.org")
+                                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                )
+                .andExpect(status().is4xxClientError())
+                .andExpect(view().name("/subscribers/index"));
+
+        assertEquals(0, subscriberRepository.count());
     }
 
     @Test

@@ -7,6 +7,7 @@ import be.mira.jongeren.mailinglist.selenium.pages.SubscriptionCreationPage;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import static be.mira.jongeren.mailinglist.selenium.pages.SubscriptionCreationPage.SUBSCRIPTIONLIST_MAIN_SEQUENCE;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -22,7 +23,8 @@ public class NewSubscriptionSeleniumTest extends SeleniumTest {
         page
             .enterEmailAddresss("luke.skywalker@galaxy.com")
             .enterFirstName("Luke")
-            .enterLastName("Skywalker");
+            .enterLastName("Skywalker")
+            .checkSubscriptionList(SUBSCRIPTIONLIST_MAIN_SEQUENCE);
 
         ActivationPage activationPage = page.submit();
 

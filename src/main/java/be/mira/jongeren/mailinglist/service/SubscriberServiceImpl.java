@@ -1,17 +1,26 @@
 package be.mira.jongeren.mailinglist.service;
 
 import be.mira.jongeren.mailinglist.domain.Subscriber;
+import be.mira.jongeren.mailinglist.domain.SubscriptionList;
 import be.mira.jongeren.mailinglist.repository.SubscriberRepository;
+import be.mira.jongeren.mailinglist.repository.SubscriptionListRepository;
 import be.mira.jongeren.mailinglist.util.TokenGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
-import java.util.Calendar;
+import java.util.List;
 
+@Service
+@Transactional
 public class SubscriberServiceImpl implements SubscriberService {
 
     @Autowired
     private SubscriberRepository subscriberRepository;
+
+    @Autowired
+    private SubscriptionListRepository subscriptionListRepository;
 
     @Autowired
     private TokenGenerator tokenGenerator;
@@ -23,7 +32,7 @@ public class SubscriberServiceImpl implements SubscriberService {
         this.mailSender = mailSender;
     }
 
-    public void subscribe(Subscriber subscriber){
+    public void subscribe(Subscriber subscriber, String[] lists){
         // Set the current date as subscription date.
         subscriber.setSubscriptionDate(LocalDateTime.now());
 
@@ -34,6 +43,11 @@ public class SubscriberServiceImpl implements SubscriberService {
         // Persist in database
         subscriberRepository.save(subscriber);
 
+        for(String listTitle : lists) {
+            List<SubscriptionList> all = subscriptionListRepository.findAll();
+            SubscriptionList list = subscriptionListRepository.findByTitle(listTitle);
+            list.getSubscribers().add(subscriber);
+        }
 
         // Prepare Mail
         String body = String.format("Beste, \n" +
@@ -54,9 +68,7 @@ public class SubscriberServiceImpl implements SubscriberService {
 
     public boolean activate(Long id, String token){
         Subscriber subscriber = subscriberRepository.getOne(id);
-        if(subscriber.getToken().equals(token)){
-            subscriber.setActive(true);
-        }
+        subscriber.activate(token);
         return subscriber.isActive();
     }
 

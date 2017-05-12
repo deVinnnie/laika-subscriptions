@@ -15,6 +15,13 @@ block content
         label(for="achternaam") Achternaam
         input(type="text", id="achternaam", value="", name="achternaam")
 
+        fieldset
+            legend Choose Interests
+            each list in lists
+                input(type="checkbox", id="list-#{list.title}" name="lists", value="#{list.title}") #{list.title}
+                label(for="list-#{list.title}") #{list.title}
+
+
         button.pure-button.pure-button-primary(type="submit") Inschrijven
 
 

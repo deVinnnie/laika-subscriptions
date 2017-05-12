@@ -30,4 +30,12 @@ public class SubscriptionList {
     public void setSubscribers(List<Subscriber> subscribers) {
         this.subscribers = subscribers;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }
