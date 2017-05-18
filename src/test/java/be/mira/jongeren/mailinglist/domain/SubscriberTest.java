@@ -59,4 +59,4 @@ public class SubscriberTest {
         assertFalse(subscriber.isActive());
     }
 
-    }
+}

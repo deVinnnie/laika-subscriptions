@@ -1,12 +1,13 @@
 package be.mira.jongeren.mailinglist.domain;
 
-import be.mira.jongeren.mailinglist.util.date.Past;
 import org.hibernate.validator.constraints.Email;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
-import java.util.Calendar;
 
 @Entity
 public class Subscriber {

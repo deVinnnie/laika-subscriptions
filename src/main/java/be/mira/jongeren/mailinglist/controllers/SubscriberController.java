@@ -56,8 +56,9 @@ public class SubscriberController {
     }
 
     @RequestMapping(path = "/activate/{id}", method= RequestMethod.POST)
-    public ModelAndView activateSubriber(@PathVariable("id") Long id,
-                                         @RequestParam("token") String token){
+    public ModelAndView activateSubscriber(@PathVariable("id") Long id,
+                                         @RequestParam("token") String token)
+    {
         boolean activated = subscriberService.activate(id, token);
 
         if(activated) {
