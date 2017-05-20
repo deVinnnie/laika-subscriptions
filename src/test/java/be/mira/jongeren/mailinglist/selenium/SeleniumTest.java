@@ -22,6 +22,7 @@ import javax.transaction.Transactional;
 import java.util.concurrent.TimeUnit;
 
 import static com.ninja_squad.dbsetup.Operations.deleteAllFrom;
+import static com.ninja_squad.dbsetup.Operations.insertInto;
 import static com.ninja_squad.dbsetup.Operations.sequenceOf;
 import static org.junit.Assume.assumeTrue;
 
@@ -67,10 +68,18 @@ public abstract class SeleniumTest {
     }
 
     @Before
-    public void setup(){
-//        Operation operation = deleteAllFrom("partaking", "event", "person");
-//        DbSetup dbSetup = new DbSetup(new DataSourceDestination(dataSource), operation);
-//        dbSetup.launch();
+    public void dbSetup(){
+        Operation operation = sequenceOf(
+                deleteAllFrom("subscription_list"),
+                insertInto("subscription_list")
+                        .columns("id","title")
+                        .values("10", "main-sequence")
+                        .values("20", "supernova")
+                        .build()
+        );
+
+        DbSetup dbSetup = new DbSetup(new DataSourceDestination(dataSource), operation);
+        dbSetup.launch();
     }
 
     private static void verifySeleniumEnablingPreConditions(){

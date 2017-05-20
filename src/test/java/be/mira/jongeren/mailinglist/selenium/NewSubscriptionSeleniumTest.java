@@ -32,11 +32,14 @@ public class NewSubscriptionSeleniumTest extends SeleniumTest {
         Subscriber subscriber = subscriberRepository.findOne(1L);
 
         // 2. Activate with Token
-        activationPage
+        SubscriptionCreationPage homePage = activationPage
                 .enterToken(subscriber.getToken())
                 .submit();
 
         subscriber = subscriberRepository.findOne(1L);
         assertTrue(subscriber.isActive());
+
+        // 3. A green box should appear on the home page.
+        assertTrue(homePage.isCalloutPresent());
     }
 }

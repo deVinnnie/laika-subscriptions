@@ -133,6 +133,12 @@
             <artifactId>purecss</artifactId>
             <version>0.6.0</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.webjars.npm</groupId>
+            <artifactId>foundation-sites</artifactId>
+            <version>6.3.1</version>
+        </dependency>
     </dependencies>
 
     <build>

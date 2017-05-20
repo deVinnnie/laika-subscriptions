@@ -23,6 +23,13 @@ public class SubscriptionCreationPage extends PageObject{
     @FindBy(tagName = "form")
     private WebElement formElement;
 
+    @FindBy(className = "callout")
+    private WebElement callout;
+
+    public SubscriptionCreationPage(WebDriver webDriver) {
+        super(webDriver);
+    }
+
     public SubscriptionCreationPage(WebDriver webDriver, String baseUrl) {
         super(webDriver, baseUrl, "/");
     }
@@ -50,5 +57,9 @@ public class SubscriptionCreationPage extends PageObject{
     public ActivationPage submit(){
         this.formElement.submit();
         return new ActivationPage(driver());
+    }
+
+    public boolean isCalloutPresent() {
+        return (callout != null);
     }
 }

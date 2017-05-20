@@ -17,13 +17,13 @@ public class Subscriber {
     private Long id;
 
     @Size(max=255)
-    private String voornaam;
+    private String voornaam = "";
 
     @Size(max=255)
-    private String achternaam;
+    private String achternaam = "";
 
     @Email
-    private String email;
+    private String email = "";
 
     private LocalDateTime subscriptionDate;
 
@@ -108,5 +108,17 @@ public class Subscriber {
         if(this.getToken() != null && this.getToken().equals(token)) {
             this.setActive(true);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Subscriber{" +
+                "id=" + id +
+                ", voornaam='" + voornaam + '\'' +
+                ", achternaam='" + achternaam + '\'' +
+                ", email='" + email + '\'' +
+                ", subscriptionDate=" + subscriptionDate +
+                ", active=" + active +
+                '}';
     }
 }

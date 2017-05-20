@@ -1,19 +1,24 @@
 extends ../layouts/default
 
 block content
+    if subscriber.isActive()
+        .callout.success
+            p #{subscriber.email} werd toegevoegd aan de mailinglijst.
+        - subscriber = new("be.mira.jongeren.mailinglist.domain.Subscriber")
+
     h1 MIRA Jeugdkern Mailinglijst
 
     p Schrijf je in op onze mailinglijst en dan houden wij je op de hoogte van het doen en laten van de Jeugdkern. Op deze manier mis je geen enkele activiteit!
 
     form.pure-form.pure-form-stacked#subscription_form(method="POST", action="")
         label(for="email") E-mailadres
-        input(type="text", id="email" value="", name="email")
+        input(type="text", id="email" value="#{subscriber.email}", name="email")
 
         label(for="voornaam") Voornaam
-        input(type="text", id="voornaam", value="", name="voornaam")
+        input(type="text", id="voornaam", value="#{subscriber.voornaam}", name="voornaam")
 
         label(for="achternaam") Achternaam
-        input(type="text", id="achternaam", value="", name="achternaam")
+        input(type="text", id="achternaam", value="#{subscriber.achternaam}", name="achternaam")
 
         fieldset
             legend Choose Interests

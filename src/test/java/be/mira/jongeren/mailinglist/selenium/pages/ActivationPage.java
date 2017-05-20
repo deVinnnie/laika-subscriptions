@@ -16,13 +16,13 @@ public class ActivationPage extends PageObject{
         super(webDriver);
     }
 
-
     public ActivationPage enterToken(String token) {
         tokenInputElement.sendKeys(token);
         return this;
     }
 
-    public void submit(){
+    public SubscriptionCreationPage submit(){
         formElement.submit();
+        return new SubscriptionCreationPage(driver());
     }
 }
