@@ -4,13 +4,16 @@ import be.mira.jongeren.mailinglist.controllers.SubscriberController;
 import be.mira.jongeren.mailinglist.domain.Subscriber;
 import be.mira.jongeren.mailinglist.domain.Subscriber;
 import be.mira.jongeren.mailinglist.repository.SubscriberRepository;
+import org.hamcrest.core.StringContains;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultMatcher;
+import org.springframework.test.web.servlet.result.ViewResultMatchers;
 
 import java.util.Calendar;
 
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.IsEqual.equalTo;
@@ -48,17 +51,43 @@ public class SubscriberControllerTest extends MockMvcTest {
     }
 
     @Test
-    public void addSubscriberWithoutSubscriptionLists() throws Exception {
+    public void addSubscriberWithoutSubscriptionListsGives400() throws Exception {
         mockMvc()
-                .perform(
-                        post("/")
-                                .param("voornaam", "Luke")
-                                .param("achternaam", "Skywalker")
-                                .param("email", "luke.skywalker@rebellion.org")
-                                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                )
-                .andExpect(status().is4xxClientError())
-                .andExpect(view().name("subscribers/index"));
+            .perform(
+                post("/")
+                    .param("voornaam", "Luke")
+                    .param("achternaam", "Skywalker")
+                    .param("email", "luke.skywalker@rebellion.org")
+                    .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            )
+            .andExpect(status().is4xxClientError())
+            .andExpect(view().name("subscribers/index"));
+
+        assertEquals(0, subscriberRepository.count());
+    }
+
+    @Test
+    public void addSubscriberWithoutAnyFieldsFilledInGives400() throws Exception {
+        mockMvc()
+            .perform(
+                post("/")
+            )
+            .andExpect(status().is4xxClientError())
+            .andExpect(view().name(containsString("index")));
+    }
+
+    @Test
+    public void addSubscriberWithoutEmailAddressGives400() throws Exception {
+        mockMvc()
+            .perform(
+                post("/")
+                    .param("voornaam", "Luke")
+                    .param("achternaam", "Skywalker")
+                    .param("lists", "main-sequence", "supernova")
+                    .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            )
+            .andExpect(status().is4xxClientError())
+            .andExpect(view().name(containsString("index")));
 
         assertEquals(0, subscriberRepository.count());
     }

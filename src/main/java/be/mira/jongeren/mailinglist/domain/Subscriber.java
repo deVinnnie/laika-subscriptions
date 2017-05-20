@@ -1,6 +1,7 @@
 package be.mira.jongeren.mailinglist.domain;
 
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,6 +20,7 @@ public class Subscriber extends AbstractEntity{
     private String achternaam = "";
 
     @Email
+    @NotEmpty
     private String email = "";
 
     private LocalDateTime subscriptionDate;
@@ -32,11 +34,15 @@ public class Subscriber extends AbstractEntity{
         this.subscriptionDate = LocalDateTime.now();
     }
 
-    public Subscriber(String voornaam, String achternaam, String email) {
+    public Subscriber(String email){
         this();
+        this.email = email;
+    }
+
+    public Subscriber(String voornaam, String achternaam, String email) {
+        this(email);
         this.voornaam = voornaam;
         this.achternaam = achternaam;
-        this.email = email;
     }
 
     public Subscriber(String voornaam, String achternaam, String email, LocalDateTime subscriptionDate) {

@@ -8,10 +8,12 @@ import be.mira.jongeren.mailinglist.service.SubscriberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -37,8 +39,8 @@ public class SubscriberController {
     }
 
     @RequestMapping(method= RequestMethod.POST)
-    public ModelAndView addSubscriber(Subscriber subscriber, @RequestParam(value = "lists", required = false) String[] lists){
-        if(lists == null || lists.length == 0){
+    public ModelAndView addSubscriber(@Valid Subscriber subscriber, BindingResult result, @RequestParam(value = "lists", required = false) String[] lists){
+        if(lists == null || lists.length == 0 || result.hasErrors()){
             ModelAndView mav = this.subscriptionPage(subscriber);
             mav.setStatus(HttpStatus.BAD_REQUEST);
             return mav;
