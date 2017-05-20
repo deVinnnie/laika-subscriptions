@@ -204,7 +204,7 @@
                 <version>2.15</version>
                 <configuration>
                     <argLine>${argLine}</argLine>
-                    <skipTests>false</skipTests>
+                    
                     <!-- Excludes integration tests when unit tests are run. -->
                     <excludes>
                         <exclude>**/selenium/*Test.java</exclude>
