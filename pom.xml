@@ -104,6 +104,12 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.icegreen</groupId>
+            <artifactId>greenmail</artifactId>
+            <version>1.5.5</version>
+        </dependency>
+
         <!-- Other -->
         <dependency>
             <groupId>commons-lang</groupId>
