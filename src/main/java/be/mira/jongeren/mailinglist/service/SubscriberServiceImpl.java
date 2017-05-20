@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
+import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -64,6 +65,23 @@ public class SubscriberServiceImpl implements SubscriberService {
 
 
         mailSender.send(subscriber.getEmail(), body);
+    }
+
+    @Override
+    public void unsubscribe(Subscriber subscriber){
+        Iterator<SubscriptionList> iterator = subscriber.getSubscriptions().iterator();
+        while(iterator.hasNext()){
+            SubscriptionList subscriptionList = iterator.next();
+            subscriptionList.removeSubscriber(subscriber);
+            iterator.remove();
+        }
+
+        subscriberRepository.delete(subscriber);
+    }
+
+    @Override
+    public void unsubscribe(Long id){
+        unsubscribe(subscriberRepository.findOne(id));
     }
 
     public boolean activate(Long id, String token){

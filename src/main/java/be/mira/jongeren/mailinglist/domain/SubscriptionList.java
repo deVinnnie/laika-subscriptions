@@ -28,4 +28,8 @@ public class SubscriptionList extends AbstractEntity{
         this.subscribers = subscribers;
     }
 
+    public void removeSubscriber(Subscriber subscriber){
+        this.subscribers.remove(subscriber);
+    }
+
 }

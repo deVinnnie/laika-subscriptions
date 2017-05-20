@@ -3,6 +3,7 @@ package be.mira.jongeren.mailinglist.controller;
 import be.mira.jongeren.mailinglist.controllers.SubscriberController;
 import be.mira.jongeren.mailinglist.domain.Subscriber;
 import be.mira.jongeren.mailinglist.repository.SubscriberRepository;
+import be.mira.jongeren.mailinglist.common.MockMvcTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -27,15 +28,15 @@ public class SubscriberControllerTest extends MockMvcTest {
     @Test
     public void addSubscriberAddsNewEntity() throws Exception {
         mockMvc()
-                .perform(
-                        post("/")
-                                .param("voornaam", "Luke")
-                                .param("achternaam", "Skywalker")
-                                .param("email", "luke.skywalker@rebellion.org")
-                                .param("lists", "main-sequence", "supernova")
-                                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                )
-                .andExpect(status().is3xxRedirection());
+            .perform(
+                    post("/")
+                            .param("voornaam", "Luke")
+                            .param("achternaam", "Skywalker")
+                            .param("email", "luke.skywalker@rebellion.org")
+                            .param("lists", "main-sequence", "supernova")
+                            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            )
+            .andExpect(status().is3xxRedirection());
 
         assertThat(subscriberRepository.findAll(), hasSize(equalTo(1)));
 

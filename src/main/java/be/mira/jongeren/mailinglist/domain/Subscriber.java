@@ -3,12 +3,10 @@ package be.mira.jongeren.mailinglist.domain;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 public class Subscriber extends AbstractEntity{
@@ -29,6 +27,9 @@ public class Subscriber extends AbstractEntity{
 
     @Size(max=16)
     private String token;
+
+    @ManyToMany(mappedBy="subscribers")
+    private List<SubscriptionList> subscriptions;
 
     public Subscriber(){
         this.subscriptionDate = LocalDateTime.now();
@@ -104,6 +105,14 @@ public class Subscriber extends AbstractEntity{
         }
     }
 
+    public List<SubscriptionList> getSubscriptions() {
+        return subscriptions;
+    }
+
+    public void setSubscriptions(List<SubscriptionList> subscriptions) {
+        this.subscriptions = subscriptions;
+    }
+
     @Override
     public String toString() {
         return "Subscriber{" +
@@ -114,5 +123,9 @@ public class Subscriber extends AbstractEntity{
                 ", subscriptionDate=" + subscriptionDate +
                 ", active=" + active +
                 '}';
+    }
+
+    public void removeSubscription(SubscriptionList subscriptionList) {
+        this.subscriptions.remove(subscriptionList);
     }
 }
