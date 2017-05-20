@@ -10,11 +10,7 @@ import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @Entity
-public class Subscriber {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class Subscriber extends AbstractEntity{
 
     @Size(max=255)
     private String voornaam = "";
@@ -46,14 +42,6 @@ public class Subscriber {
     public Subscriber(String voornaam, String achternaam, String email, LocalDateTime subscriptionDate) {
         this(voornaam, achternaam, email);
         this.subscriptionDate = subscriptionDate;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getVoornaam() {
@@ -113,7 +101,7 @@ public class Subscriber {
     @Override
     public String toString() {
         return "Subscriber{" +
-                "id=" + id +
+                "id=" + this.getId() +
                 ", voornaam='" + voornaam + '\'' +
                 ", achternaam='" + achternaam + '\'' +
                 ", email='" + email + '\'' +

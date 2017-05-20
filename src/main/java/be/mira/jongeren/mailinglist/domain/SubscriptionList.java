@@ -4,10 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class SubscriptionList {
-
-    @Id
-    private Long id;
+public class SubscriptionList extends AbstractEntity{
 
     @Column(unique=true)
     private String title;
@@ -31,11 +28,4 @@ public class SubscriptionList {
         this.subscribers = subscribers;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 }
