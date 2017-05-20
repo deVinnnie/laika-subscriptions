@@ -2,24 +2,19 @@ package be.mira.jongeren.mailinglist.controller;
 
 import be.mira.jongeren.mailinglist.controllers.SubscriberController;
 import be.mira.jongeren.mailinglist.domain.Subscriber;
-import be.mira.jongeren.mailinglist.domain.Subscriber;
 import be.mira.jongeren.mailinglist.repository.SubscriberRepository;
-import org.hamcrest.core.StringContains;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.ResultMatcher;
-import org.springframework.test.web.servlet.result.ViewResultMatchers;
-
-import java.util.Calendar;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 public class SubscriberControllerTest extends MockMvcTest {
 
