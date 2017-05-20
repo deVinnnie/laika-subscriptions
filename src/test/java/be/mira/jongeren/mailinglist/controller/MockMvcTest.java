@@ -1,9 +1,9 @@
 package be.mira.jongeren.mailinglist.controller;
 
 import be.mira.jongeren.mailinglist.Application;
+import be.mira.jongeren.mailinglist.util.CreateListsOperation;
 import com.ninja_squad.dbsetup.DbSetup;
 import com.ninja_squad.dbsetup.destination.DataSourceDestination;
-import com.ninja_squad.dbsetup.operation.Operation;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
 import javax.sql.DataSource;
-
-import static com.ninja_squad.dbsetup.Operations.deleteAllFrom;
-import static com.ninja_squad.dbsetup.Operations.insertInto;
-import static com.ninja_squad.dbsetup.Operations.sequenceOf;
 
 /**
  * Base test class with the right configuration to use Spring MockMvc.
@@ -54,16 +50,7 @@ public abstract class MockMvcTest {
 
     @Before
     public void dbSetup(){
-        Operation operation = sequenceOf(
-                deleteAllFrom("subscription_list"),
-                insertInto("subscription_list")
-                        .columns("id","title")
-                        .values("10", "main-sequence")
-                        .values("20", "supernova")
-                        .build()
-        );
-
-        DbSetup dbSetup = new DbSetup(new DataSourceDestination(dataSource), operation);
+        DbSetup dbSetup = new DbSetup(new DataSourceDestination(dataSource), CreateListsOperation.operation);
         dbSetup.launch();
     }
 
