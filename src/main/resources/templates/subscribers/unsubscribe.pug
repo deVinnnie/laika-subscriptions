@@ -1,0 +1,15 @@
+extends ../layouts/default
+
+block content
+    if unsubscribed
+        .callout.success
+            p Het e-mailadres werd verwijderd van de lijst.
+
+    h1 Uitschrijven
+    p Wens je geen mails meer te ontvangen? Geef in onderstaand formulier je emailadres in en je wordt verwijderd van de mailinglijst.
+
+    form.pure-form.pure-form-stacked(method="POST")
+        label(for="email") E-mailadres
+        input(id="email", name="email", type="text", required)
+
+        button.pure-button.pure-button-primary(type="submit") Uitschrijven

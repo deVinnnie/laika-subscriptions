@@ -7,4 +7,5 @@ import be.mira.jongeren.mailinglist.domain.Subscriber;
 @Repository
 public interface SubscriberRepository extends JpaRepository<Subscriber, Long> {
 
+    Subscriber findByEmail(String email);
 }

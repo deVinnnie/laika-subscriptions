@@ -78,4 +78,28 @@ public class SubscriberController {
         }
     }
 
+    @RequestMapping(path = "/unsubscribe", method= RequestMethod.GET)
+    public ModelAndView unsubscribeForm() {
+        ModelAndView mav = new ModelAndView("subscribers/unsubscribe");
+        return mav;
+    }
+
+    @RequestMapping(path = "/unsubscribe", method= RequestMethod.GET, headers = "Referer=http://localhost:8080/unsubscribe")
+    public ModelAndView succesfulUnsubscription(){
+        ModelAndView mav = new ModelAndView("subscribers/unsubscribe");
+        mav.addObject("unsubscribed", true);
+        return mav;
+    }
+
+    @RequestMapping(path = "/unsubscribe", method= RequestMethod.POST)
+    public ModelAndView unsubscribe(String email) {
+        Subscriber subscriber = subscriberRepository.findByEmail(email);
+        if(subscriber != null) {
+            subscriberService.unsubscribe(subscriber);
+        }
+
+        ModelAndView mav = new ModelAndView("redirect:/unsubscribe");
+
+        return mav;
+    }
 }

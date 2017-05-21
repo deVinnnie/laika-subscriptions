@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -29,7 +30,7 @@ public class Subscriber extends AbstractEntity{
     private String token;
 
     @ManyToMany(mappedBy="subscribers")
-    private List<SubscriptionList> subscriptions;
+    private List<SubscriptionList> subscriptions = new ArrayList<>();
 
     public Subscriber(){
         this.subscriptionDate = LocalDateTime.now();

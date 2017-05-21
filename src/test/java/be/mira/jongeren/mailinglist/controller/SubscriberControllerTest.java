@@ -13,9 +13,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 public class SubscriberControllerTest extends MockMvcTest {
 
@@ -168,5 +167,47 @@ public class SubscriberControllerTest extends MockMvcTest {
                 );
 
         assertFalse(subscriber.isActive());
+    }
+
+    @Test
+    public void unsubscribeRemovesSubscriber() throws Exception{
+        // Prepare test subscriber.
+        Subscriber subscriber = new Subscriber("Luke", "Skywalker", "luke.skywalker@rebellion.org");
+        subscriberRepository.save(subscriber);
+
+        mockMvc()
+            .perform(
+                post("/unsubscribe/")
+                    .param("email", subscriber.getEmail())
+                    .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            )
+            .andExpect(
+                status().is3xxRedirection()
+            );
+
+        assertEquals(0, subscriberRepository.count());
+    }
+
+    @Test
+    public void unsubscribeForNonExistantSubscriberGivesRedirect() throws Exception{
+        mockMvc()
+            .perform(
+                post("/unsubscribe/")
+                    .param("email", "han@solo.org")
+                    .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            )
+            .andExpect(status().is3xxRedirection());
+    }
+
+    @Test
+    public void redirectPageAfterUnsubscribeContainsCallout() throws Exception{
+        mockMvc()
+            .perform(
+                get("/unsubscribe/")
+                    .header("Referer", "http://localhost:8080/unsubscribe")
+                    .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            )
+            .andExpect(status().is2xxSuccessful())
+            .andExpect(content().string(containsString("callout")));
     }
 }

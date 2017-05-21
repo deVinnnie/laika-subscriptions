@@ -1,16 +1,20 @@
 package be.mira.jongeren.mailinglist.domain;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 public class SubscriptionList extends AbstractEntity{
 
     @Column(unique=true)
+    @NotEmpty
     private String title;
 
     @OneToMany
-    private List<Subscriber> subscribers;
+    private List<Subscriber> subscribers = new ArrayList<>();
 
     public String getTitle() {
         return title;
