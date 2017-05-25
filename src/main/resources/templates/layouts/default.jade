@@ -3,14 +3,17 @@ html(lang="en")
 	head
 		meta(charset="utf-8")
 		meta(name="viewport", content="width=device-width, initial-scale=1")
-		link(rel='stylesheet', href='/webjars/purecss/build/pure.css')
-		link(rel='stylesheet', href='/webjars/foundation-sites/dist/css/foundation.css')
+		link(rel='stylesheet', href='/webjars/purecss/build/base-min.css')
+		link(rel='stylesheet', href='/webjars/purecss/build/forms-min.css')
+		link(rel='stylesheet', href='/webjars/purecss/build/buttons-min.css')
+		link(rel='stylesheet', href='/webjars/purecss/build/grids-responsive-min.css')
+		//link(rel='stylesheet', href='/webjars/foundation-sites/dist/css/foundation.css')
 		link(rel='stylesheet', href='/css/main.css')
 
 		title= Inschrijven
 	body
 		.pure-g
-			.pure-u-1.pure-u-md-1-3
-			.pure-u-1.pure-u-md-1-3.content
+			.pure-u-sm-0.pure-u-md-1-5
+				// Empty column to force centering
+			.pure-u-sm-1.pure-u-md-3-5.content
 				block content
-			.pure-u-1.pure-u-md-1-3

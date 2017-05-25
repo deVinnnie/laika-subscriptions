@@ -1,8 +1,24 @@
+@import 'fonts';
+
 body{
     background: #123;
+}
+
+*{
+    font-family: "OpenSans";
 }
 
 .content{
     padding: 1em;
     background: #FFF;
+    padding: 1em;
+    //padding-top: 0;
+}
+
+label.required:after{
+    content: ' *';
+}
+
+form{
+    margin-bottom: 1em;
 }
