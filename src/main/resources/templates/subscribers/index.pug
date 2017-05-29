@@ -12,7 +12,7 @@ block content
 
     form.pure-form.pure-form-stacked#subscription_form(method="POST", action="/")
         label.required(for="email") E-mailadres
-        input.pure-input-1(type="text", id="email" value="#{subscriber.email}", name="email", required)
+        input.pure-input-1(type="email", id="email" value="#{subscriber.email}", name="email", required)
 
         label(for="voornaam") Voornaam
         input.pure-input-1(type="text", id="voornaam", value="#{subscriber.voornaam}", name="voornaam")
