@@ -1,5 +1,9 @@
 extends ../layouts/default
 
+block variables
+    - var pageTitle = "MIRA Jeugdkern Mailinglijst"
+
+
 block content
     if subscriber.isActive()
         .callout.success
