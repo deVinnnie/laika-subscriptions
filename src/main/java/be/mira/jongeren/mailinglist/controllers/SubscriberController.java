@@ -40,11 +40,18 @@ public class SubscriberController {
 
     @RequestMapping(method= RequestMethod.POST)
     public ModelAndView addSubscriber(@Valid Subscriber subscriber, BindingResult result, @RequestParam(value = "lists", required = false) String[] lists){
-        if(lists == null || lists.length == 0 || result.hasErrors()){
+        if(lists == null || lists.length == 0){
+            ModelAndView mav = this.subscriptionPage(subscriber);
+            mav.setStatus(HttpStatus.BAD_REQUEST);
+            result.rejectValue("subscriptions", "subscriptions.count.min", "subscriptions.count.min");
+            return mav;
+        }
+        if(result.hasErrors()){
             ModelAndView mav = this.subscriptionPage(subscriber);
             mav.setStatus(HttpStatus.BAD_REQUEST);
             return mav;
         }
+
 
         this.subscriberService.subscribe(subscriber, lists);
 

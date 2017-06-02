@@ -25,6 +25,12 @@ public class PugView implements View {
 
     @Override
     public void render(Map<String, ?> model, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        modelFilter(model);
         templateEngine.renderResource(templateName + ".pug", (Map<String, Object>) model, response.getWriter());
+    }
+
+    // https://docs.oracle.com/javase/tutorial/java/generics/capture.html
+    private <T> void modelFilter(Map<String, T> model){
+        model.put("bindingResult", model.get("org.springframework.validation.BindingResult.subscriber"));
     }
 }

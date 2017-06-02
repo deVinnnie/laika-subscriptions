@@ -17,19 +17,24 @@ block content
     form.pure-form.pure-form-stacked#subscription_form(method="POST", action="/")
         label.required(for="email") E-mailadres
         input.pure-input-1(type="email", id="email" value="#{subscriber.email}", name="email", required)
+        +errors('email')
 
         label(for="voornaam") Voornaam
         input.pure-input-1(type="text", id="voornaam", value="#{subscriber.voornaam}", name="voornaam")
+        +errors('voornaam')
 
         label(for="achternaam") Achternaam
         input.pure-input-1(type="text", id="achternaam", value="#{subscriber.achternaam}", name="achternaam")
+        +errors('achternaam')
 
         fieldset
             legend Kies de activiteiten waarvoor je notificaties wilt ontvangen:
+            +errors('subscriptions')
+
             each list in lists
                 .pure-controls
                     label.pure-checkbox(for="list-#{list.title}")
-                        input(type="checkbox", id="list-#{list.title}", name="lists")
+                        input(type="checkbox", id="list-#{list.title}", name="lists", value="#{list.title}")
                         span #{pippo.i18n(list.title)}
 
         button.pure-button.pure-button-primary(type="submit") Inschrijven
