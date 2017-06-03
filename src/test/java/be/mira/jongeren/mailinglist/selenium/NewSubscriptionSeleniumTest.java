@@ -2,6 +2,7 @@ package be.mira.jongeren.mailinglist.selenium;
 
 import be.mira.jongeren.mailinglist.domain.Subscriber;
 import be.mira.jongeren.mailinglist.repository.SubscriberRepository;
+import be.mira.jongeren.mailinglist.repository.SubscriptionCountRepository;
 import be.mira.jongeren.mailinglist.selenium.pages.ActivationPage;
 import be.mira.jongeren.mailinglist.selenium.pages.SubscriptionCreationPage;
 import org.junit.Test;
@@ -15,6 +16,9 @@ public class NewSubscriptionSeleniumTest extends SeleniumTest {
 
     @Autowired
     private SubscriberRepository subscriberRepository;
+
+    @Autowired
+    private SubscriptionCountRepository subscriptionCountRepository;
 
     @Test
     public void createNewSubscription(){
@@ -38,6 +42,9 @@ public class NewSubscriptionSeleniumTest extends SeleniumTest {
 
         subscriber = subscriberRepository.findOne(1L);
         assertTrue(subscriber.isActive());
+
+        // 4. Trigger for SubscriptionCount should have run.
+        assertEquals(2, subscriptionCountRepository.count());
 
         // 3. A green box should appear on the home page.
         assertTrue(homePage.isCalloutPresent());

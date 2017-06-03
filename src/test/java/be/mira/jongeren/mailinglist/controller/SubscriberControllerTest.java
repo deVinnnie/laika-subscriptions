@@ -56,7 +56,9 @@ public class SubscriberControllerTest extends MockMvcTest {
                     .contentType(MediaType.APPLICATION_FORM_URLENCODED)
             )
             .andExpect(status().is4xxClientError())
-            .andExpect(view().name("subscribers/index"));
+            .andExpect(view().name("subscribers/index"))
+            .andExpect(model().attributeHasErrors("subscriber"))
+            .andExpect(content().string(containsString("class=\"error\"")));
 
         assertEquals(0, subscriberRepository.count());
     }

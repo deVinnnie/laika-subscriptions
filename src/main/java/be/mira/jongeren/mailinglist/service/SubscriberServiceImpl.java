@@ -47,7 +47,7 @@ public class SubscriberServiceImpl implements SubscriberService {
         for(String listTitle : lists) {
             List<SubscriptionList> all = subscriptionListRepository.findAll();
             SubscriptionList list = subscriptionListRepository.findByTitle(listTitle);
-            list.getSubscribers().add(subscriber);
+            list.add(subscriber);
         }
 
         // Prepare Mail
@@ -72,7 +72,7 @@ public class SubscriberServiceImpl implements SubscriberService {
         Iterator<SubscriptionList> iterator = subscriber.getSubscriptions().iterator();
         while(iterator.hasNext()){
             SubscriptionList subscriptionList = iterator.next();
-            subscriptionList.removeSubscriber(subscriber);
+            subscriptionList.remove(subscriber);
             iterator.remove();
         }
 

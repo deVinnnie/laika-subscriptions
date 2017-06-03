@@ -32,8 +32,23 @@ public class SubscriptionList extends AbstractEntity{
         this.subscribers = subscribers;
     }
 
-    public void removeSubscriber(Subscriber subscriber){
+    public void remove(Subscriber subscriber){
         this.subscribers.remove(subscriber);
+    }
+
+    public void add(Subscriber subscriber){
+        this.subscribers.add(subscriber);
+    }
+
+    /**
+     *
+     * @return Number of active Subscribers.
+     */
+    public long count(){
+        return this.subscribers
+                .stream()
+                .filter(s -> s.isActive())
+                .count();
     }
 
 }

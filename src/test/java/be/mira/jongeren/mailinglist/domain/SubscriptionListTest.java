@@ -29,20 +29,42 @@ public class SubscriptionListTest {
 
     @Test
     public void removeSubscriberDeletesFromList(){
-        subscriptionList.removeSubscriber(luke);
+        subscriptionList.remove(luke);
 
         assertEquals(1, subscriptionList.getSubscribers().size());
     }
 
     @Test
     public void removeSubscriberWithNonExistantSubscriberDoesNothing(){
-        subscriptionList.removeSubscriber(han);
+        subscriptionList.remove(han);
         assertEquals(2, subscriptionList.getSubscribers().size());
     }
 
     @Test
     public void removeSubscriberWithNullDoesNothing(){
-        subscriptionList.removeSubscriber(null);
+        subscriptionList.remove(null);
         assertEquals(2, subscriptionList.getSubscribers().size());
+    }
+
+    @Test
+    public void countWithNewSubscriptionListReturnsZero() {
+        SubscriptionList list = new SubscriptionList();
+        assertEquals(0, list.count());
+    }
+
+
+    @Test
+    public void countOnlyConsidersActiveSubscribers(){
+        SubscriptionList list = new SubscriptionList();
+        luke = new Subscriber("luke@rebellion.org");
+        luke.setActive(false);
+
+        leia = new Subscriber("leia@rebellion.org");
+        leia.setActive(true);
+
+        list.add(luke);
+        list.add(leia);
+
+        assertEquals(1, list.count());
     }
 }
