@@ -217,9 +217,9 @@
                     <argLine>${argLine}</argLine>
                     
                     <!-- Excludes integration tests when unit tests are run. -->
-                    <excludes>
+                    <!--<excludes>
                         <exclude>**/selenium/*Test.java</exclude>
-                    </excludes>
+                    </excludes>-->
                 </configuration>
             </plugin>
         </plugins>
