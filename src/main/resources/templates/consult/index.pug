@@ -1,0 +1,31 @@
+extends ../layouts/default
+
+block variables
+    - var pageTitle = "MIRA Jeugdkern Mailinglijst"
+
+
+block content
+    each subscriptionList in subscriptionLists
+        h1 #{pippo.i18n(subscriptionList.title)}
+
+        table.pure-table.pure-table-striped
+            thead
+                tr
+                    th E-mail
+                    th Voornaam
+                    th Achternaam
+            tbody
+                each subscriber in subscriptionList.subscribers
+                    tr
+                        td #{subscriber.email}
+                        td #{subscriber.voornaam}
+                        td #{subscriber.achternaam}
+
+
+        pre
+            each subscriber, i in subscriptionList.subscribers
+                //- Avoid leading comma-sign.
+                if i == 0
+                    | #{subscriber.email}
+                else
+                    | , #{subscriber.email}
