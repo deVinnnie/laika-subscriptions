@@ -152,10 +152,6 @@
             <artifactId>foundation-sites</artifactId>
             <version>${foundation-sites.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
     </dependencies>
 
     <build>

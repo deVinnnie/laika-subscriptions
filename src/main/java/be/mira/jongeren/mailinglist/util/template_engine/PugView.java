@@ -26,6 +26,10 @@ public class PugView implements View {
     @Override
     public void render(Map<String, ?> model, HttpServletRequest request, HttpServletResponse response) throws Exception {
         modelFilter(model);
+
+        // Fix issue where browser (chrome) displays page source instead
+        // of rendering html due to missing contentType.
+        response.setContentType("text/html");
         templateEngine.renderResource(templateName + ".pug", (Map<String, Object>) model, response.getWriter());
     }
 
