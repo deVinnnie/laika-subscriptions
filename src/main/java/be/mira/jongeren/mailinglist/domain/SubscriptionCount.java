@@ -36,15 +36,7 @@ public class SubscriptionCount extends AbstractEntity{
         return count;
     }
 
-    public void setCount(long count) {
-        this.count = count;
-    }
-
     public LocalDateTime getTimestamp() {
         return timestamp;
-    }
-
-    public void setTimestamp(LocalDateTime timestamp) {
-        this.timestamp = timestamp;
     }
 }
