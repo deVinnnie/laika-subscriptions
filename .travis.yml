@@ -18,7 +18,7 @@ jdk:
 # Skip Install Step
 install: true
 
-script: "gradle clean build jacocoTestReport coveralls"
+script: "gradle --stacktrace clean build jacocoTestReport coveralls --stacktrace"
 
 notifications:
   email:
