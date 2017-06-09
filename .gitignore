@@ -1,7 +1,10 @@
 target/
+build/
 .idea/
 *.iml
 *.project
 *.settings
 *.classpath
+.gradle/
 test.db
+.asscache

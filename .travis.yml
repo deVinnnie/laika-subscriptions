@@ -18,7 +18,7 @@ jdk:
 # Skip Install Step
 install: true
 
-script: "mvn -B clean test jacoco:report coveralls:report -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn"
+script: "gradle clean build jacocoTestReport coveralls"
 
 notifications:
   email:
