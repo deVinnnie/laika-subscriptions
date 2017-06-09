@@ -23,6 +23,19 @@ tasks.withType(JavaCompile) {
 	options.encoding = 'UTF-8'
 }
 
+tasks.matching {it instanceof Test}.all {
+    testLogging{
+        events = ["failed", "passed", "skipped"]
+
+        afterSuite { desc, result ->
+            // Match the outermost suite
+            if (!desc.parent) {
+                println "Tests run: ${result.testCount} Failures: ${result.failedTestCount} Skipped: ${result.skippedTestCount}"
+            }
+        }
+    }
+}
+
 task wrapper(type: Wrapper) {
     gradleVersion = '3.5'
 }
