@@ -1,6 +1,5 @@
 package be.mira.jongeren.mailinglist.selenium.pages;
 
-import org.apache.commons.jexl2.introspection.SandboxUberspectImpl;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

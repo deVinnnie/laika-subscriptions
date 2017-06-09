@@ -31,6 +31,17 @@ repositories {
      maven { url "http://repo.maven.apache.org/maven2" }
 }
 
+sourceSets {
+    integrationTest {
+        java {
+            compileClasspath += main.output + test.output
+            runtimeClasspath += main.output + test.output
+            srcDir file('src/integration-test/java')
+        }
+        resources.srcDir file('src/integration-test/resources')
+    }
+}
+
 dependencies {
     // Spring Boot
     compile(group: 'org.springframework.boot', name: 'spring-boot-starter', version:'1.5.2.RELEASE') {

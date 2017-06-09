@@ -51,7 +51,7 @@ public abstract class SeleniumTest {
 
     private String baseUrl = "http://localhost:8080";
 
-    private static final String SELENIUM_ENABLED_SYSTEM_PROPERTY = "selenium";
+    private static final String SELENIUM_ENABLED_SYSTEM_PROPERTY = "be/mira/jongeren/mailinglist/selenium";
 
     @Autowired
     private DataSource dataSource;
