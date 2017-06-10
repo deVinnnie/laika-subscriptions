@@ -1,0 +1,25 @@
+extends ../layouts/default
+
+block variables
+    - var pageTitle = "MIRA Jeugdkern Mailinglijst"
+
+block content
+    h1 Geschiedenis
+    a(href="/consult") Terug
+
+    #myDiv(style="width: 100%; height: 400px;")
+        // Plotly chart will be drawn inside this DIV
+
+    script
+        | var data = [{
+        |   x: [
+        each entry in subscriptionCounts
+            | '#{dateHelper.format(entry.timestamp, "yyyy-MM-dd HH:mm:ss")}',
+        |   ],
+        |   y: [
+        each entry in subscriptionCounts
+            | #{entry.count},
+        |   ],
+        |   type: 'scatter'
+        | }];
+        | Plotly.newPlot('myDiv', data);

@@ -7,10 +7,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface SubscriptionCountRepository extends JpaRepository<SubscriptionCount, Long> {
 
     @Query(value = "select * from subscription_count s where subscription_list_id = :list order by s.timestamp desc limit 1", nativeQuery = true)
     SubscriptionCount findTopSubscriptionCount(@Param("list") SubscriptionList list);
+
+    List<SubscriptionCount> findBySubscriptionList(SubscriptionList list);
 
 }

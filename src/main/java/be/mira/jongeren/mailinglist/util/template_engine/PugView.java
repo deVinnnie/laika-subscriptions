@@ -1,5 +1,6 @@
 package be.mira.jongeren.mailinglist.util.template_engine;
 
+import be.mira.jongeren.mailinglist.util.date.DateTimeFormatterHelper;
 import org.springframework.web.servlet.View;
 import ro.pippo.jade.JadeTemplateEngine;
 
@@ -27,6 +28,7 @@ public class PugView implements View {
     public void render(Map<String, ?> model, HttpServletRequest request, HttpServletResponse response) throws Exception {
         modelFilter(model);
 
+
         // Fix issue where browser (chrome) displays page source instead
         // of rendering html due to missing contentType.
         response.setContentType("text/html");
@@ -36,5 +38,6 @@ public class PugView implements View {
     // https://docs.oracle.com/javase/tutorial/java/generics/capture.html
     private <T> void modelFilter(Map<String, T> model){
         model.put("bindingResult", model.get("org.springframework.validation.BindingResult.subscriber"));
+        model.put("dateHelper", (T) new DateTimeFormatterHelper());
     }
 }
