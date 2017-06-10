@@ -19,7 +19,7 @@ public class MailSenderImplTest {
     public final GreenMailRule greenMail = new GreenMailRule(ServerSetupTest.ALL);
 
     @Test
-    public void testSomething() throws MessagingException {
+    public void assertMailIsSent() throws MessagingException {
         JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
         Properties properties = new Properties();
         properties.setProperty("mail.smtp.port", "3025");
