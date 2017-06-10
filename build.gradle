@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'jacoco'
+    id 'idea'
     id 'org.springframework.boot' version '1.5.2.RELEASE'
     id "com.bertramlabs.asset-pipeline" version '2.13.1'
     id 'com.github.kt3k.coveralls' version '2.8.1'
@@ -49,10 +50,21 @@ sourceSets {
         java {
             compileClasspath += main.output + test.output
             runtimeClasspath += main.output + test.output
-            srcDir file('src/integration-test/java')
+            srcDirs file('src/integration-test/java')
         }
         resources.srcDir file('src/integration-test/resources')
     }
+}
+
+configurations {
+    integrationTestCompile.extendsFrom testCompile
+    integrationTestRuntime.extendsFrom testRuntime
+}
+
+task integrationTest(type: Test) {
+    testClassesDir = sourceSets.integrationTest.output.classesDir
+    classpath = sourceSets.integrationTest.runtimeClasspath
+    outputs.upToDateWhen { false }
 }
 
 dependencies {
@@ -64,9 +76,6 @@ dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version:'1.5.2.RELEASE'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-aop', version:'1.5.2.RELEASE'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version:'1.5.2.RELEASE'
-    compile(group: 'org.springframework.boot', name: 'spring-boot-starter-test', version:'1.5.2.RELEASE') {
-        exclude(module: 'commons-logging')
-    }
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version:'1.5.2.RELEASE'
     compile group: 'org.springframework.boot', name: 'spring-boot-devtools', version:'1.5.2.RELEASE'
 
@@ -86,9 +95,13 @@ dependencies {
     // Test Dependencies
     testCompile group: 'junit', name: 'junit', version:'4.12'
     testCompile group: 'com.icegreen', name: 'greenmail', version:'1.5.5'
-    testCompile group: 'org.seleniumhq.selenium', name: 'selenium-java', version:'3.3.1'
-    testCompile group: 'org.seleniumhq.selenium', name: 'selenium-support', version:'3.3.1'
     testCompile group: 'com.ninja-squad', name: 'DbSetup', version:'2.1.0'
+    testCompile(group: 'org.springframework.boot', name: 'spring-boot-starter-test', version:'1.5.2.RELEASE') {
+        exclude(module: 'commons-logging')
+    }
+
+    integrationTestCompile group: 'org.seleniumhq.selenium', name: 'selenium-java', version:'3.3.1'
+    integrationTestCompile group: 'org.seleniumhq.selenium', name: 'selenium-support', version:'3.3.1'
 
     // Assets Pipeline
     //runtime 'com.bertramlabs.plugins:asset-pipeline-spring-boot:2.13.1'
@@ -115,5 +128,17 @@ jacocoTestReport {
     reports {
         xml.enabled = true // coveralls plugin depends on xml format report
         html.enabled = true
+    }
+}
+
+idea {
+    module {
+        //and some extra test source dirs
+        testSourceDirs += file('src/integration-test/java')
+        //generatedSourceDirs += file('some-extra-source-folder')
+        //scopes.TEST.plus += [ configurations.integrationTest ]
+        scopes.TEST.plus += [ configurations.integrationTestCompile ]
+        scopes.TEST.plus += [ configurations.integrationTestRuntime ]
+
     }
 }
