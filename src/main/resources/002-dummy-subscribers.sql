@@ -10,7 +10,7 @@ VALUES('10', '10'),
       ('20', '30');
 
 
-INSERT INTO SUBSCRIPTION_COUNT (id, count, timestamp, subscription_list_id)
+INSERT INTO SUBSCRIPTION_EVENT (id, count, timestamp, subscription_list_id)
 VALUES('10', '1', '2015-01-01 18:00:00', 10),
       ('20', '2', '2015-01-02 17:00:00', 10),
       ('30', '1', '2015-01-02 17:00:00', 20),

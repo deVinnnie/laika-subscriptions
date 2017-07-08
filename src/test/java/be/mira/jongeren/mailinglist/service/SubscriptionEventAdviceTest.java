@@ -1,21 +1,21 @@
 package be.mira.jongeren.mailinglist.service;
 
 import be.mira.jongeren.mailinglist.common.MockMvcTest;
-import be.mira.jongeren.mailinglist.domain.SubscriptionCount;
-import be.mira.jongeren.mailinglist.repository.SubscriptionCountRepository;
+import be.mira.jongeren.mailinglist.domain.SubscriptionEvent;
+import be.mira.jongeren.mailinglist.repository.SubscriptionEventRepository;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static com.ninja_squad.dbsetup.Operations.insertInto;
 import static org.junit.Assert.assertEquals;
 
-public class SubscriptionCountAdviceTest extends MockMvcTest {
+public class SubscriptionEventAdviceTest extends MockMvcTest {
 
     @Autowired
     private SubscriberService subscriberService;
 
     @Autowired
-    private SubscriptionCountRepository subscriptionCountRepository;
+    private SubscriptionEventRepository subscriptionEventRepository;
 
 
     @Test
@@ -30,9 +30,9 @@ public class SubscriptionCountAdviceTest extends MockMvcTest {
         subscriberService.unsubscribe(10L);
 
         // One for each SubscriptionList
-        assertEquals(2, subscriptionCountRepository.count());
+        assertEquals(2, subscriptionEventRepository.count());
 
-        for (SubscriptionCount count : subscriptionCountRepository.findAll()) {
+        for (SubscriptionEvent count : subscriptionEventRepository.findAll()) {
             assertEquals(0, count.getCount());
         }
     }
@@ -49,6 +49,6 @@ public class SubscriptionCountAdviceTest extends MockMvcTest {
         subscriberService.activate(10L, "aaaabbbbcccdddd");
 
         // One for each SubscriptionList
-        assertEquals(2, subscriptionCountRepository.count());
+        assertEquals(2, subscriptionEventRepository.count());
     }
 }

@@ -13,11 +13,11 @@ block content
     script
         | var data = [{
         |   x: [
-        each entry in subscriptionCounts
+        each entry in subscriptionEvents
             | '#{dateHelper.format(entry.timestamp, "yyyy-MM-dd HH:mm:ss")}',
         |   ],
         |   y: [
-        each entry in subscriptionCounts
+        each entry in subscriptionEvents
             | #{entry.count},
         |   ],
         |   type: 'scatter'

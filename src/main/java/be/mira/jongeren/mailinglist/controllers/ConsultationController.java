@@ -1,7 +1,7 @@
 package be.mira.jongeren.mailinglist.controllers;
 
 import be.mira.jongeren.mailinglist.domain.SubscriptionList;
-import be.mira.jongeren.mailinglist.repository.SubscriptionCountRepository;
+import be.mira.jongeren.mailinglist.repository.SubscriptionEventRepository;
 import be.mira.jongeren.mailinglist.repository.SubscriptionListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,7 +18,7 @@ public class ConsultationController {
     private SubscriptionListRepository subscriptionListRepository;
 
     @Autowired
-    private SubscriptionCountRepository subscriptionCountRepository;
+    private SubscriptionEventRepository subscriptionEventRepository;
 
     @RequestMapping(method= RequestMethod.GET)
     public ModelAndView index(){
@@ -31,7 +31,7 @@ public class ConsultationController {
     public ModelAndView history(@PathVariable("id") Long id){
         ModelAndView mav = new ModelAndView("consult/history");
         SubscriptionList list = subscriptionListRepository.findOne(id);
-        mav.addObject("subscriptionCounts", subscriptionCountRepository.findBySubscriptionList(list));
+        mav.addObject("subscriptionEvents", subscriptionEventRepository.findBySubscriptionList(list));
         return mav;
     }
 }

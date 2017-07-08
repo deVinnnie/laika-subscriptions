@@ -5,5 +5,5 @@ import com.ninja_squad.dbsetup.operation.Operation;
 import static com.ninja_squad.dbsetup.Operations.deleteAllFrom;
 
 public class ClearDatabaseOperation {
-    public static Operation operation = deleteAllFrom("subscription_count", "subscription_list_subscribers", "subscriber", "subscription_list");
+    public static Operation operation = deleteAllFrom("subscription_event", "subscription_list_subscribers", "subscriber", "subscription_list");
 }

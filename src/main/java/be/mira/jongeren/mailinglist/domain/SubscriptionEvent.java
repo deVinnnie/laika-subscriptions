@@ -6,7 +6,7 @@ import javax.validation.constraints.Min;
 import java.time.LocalDateTime;
 
 @Entity
-public class SubscriptionCount extends AbstractEntity{
+public class SubscriptionEvent extends AbstractEntity{
 
     @ManyToOne
     private SubscriptionList subscriptionList;
@@ -16,9 +16,9 @@ public class SubscriptionCount extends AbstractEntity{
 
     private LocalDateTime timestamp;
 
-    public SubscriptionCount() {}
+    public SubscriptionEvent() {}
 
-    public SubscriptionCount(SubscriptionList subscriptionList, long count) {
+    public SubscriptionEvent(SubscriptionList subscriptionList, long count) {
         this.count = count;
         this.subscriptionList = subscriptionList;
         this.timestamp = LocalDateTime.now();
