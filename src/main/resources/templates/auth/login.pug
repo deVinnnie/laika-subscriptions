@@ -8,7 +8,7 @@ block content
     form(action="login", method="POST")
         fieldset
             legend Please enter your username and password
-            input(type='text', name='username', value="user")
-            input(type='password', name='password', value="password")
+            input(type='text', name='username', value="")
+            input(type='password', name='password', value="")
         input(name="_csrf", type="hidden", value="#{_csrf}")
         input(name="submit", type="submit", value="Login")
