@@ -46,7 +46,6 @@ public class SubscriberServiceImpl implements SubscriberService {
         subscriberRepository.save(subscriber);
 
         for(String listTitle : lists) {
-            List<SubscriptionList> all = subscriptionListRepository.findAll();
             SubscriptionList list = subscriptionListRepository.findByTitle(listTitle);
             list.add(subscriber);
         }
