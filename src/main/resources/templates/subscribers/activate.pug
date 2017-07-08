@@ -8,6 +8,8 @@ block content
     p Kopieer de activatiecode in onderstaand tekstveld.
 
     form.pure-form.pure-form-stacked(method="POST")
+        input(name="_csrf", type="hidden", value="#{_csrf}")
+
         label(for="token") Activatiecode
         input(id="token", name="token", type="text", required)
 

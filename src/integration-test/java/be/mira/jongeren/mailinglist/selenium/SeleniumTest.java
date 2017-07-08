@@ -1,6 +1,7 @@
 package be.mira.jongeren.mailinglist.selenium;
 
 import be.mira.jongeren.mailinglist.Application;
+import be.mira.jongeren.mailinglist.util.ClearDatabaseOperation;
 import be.mira.jongeren.mailinglist.util.CreateListsOperation;
 import com.ninja_squad.dbsetup.DbSetup;
 import com.ninja_squad.dbsetup.destination.DataSourceDestination;
@@ -19,6 +20,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import javax.sql.DataSource;
 import java.util.concurrent.TimeUnit;
 
+import static com.ninja_squad.dbsetup.Operations.sequenceOf;
 import static org.junit.Assume.assumeTrue;
 
 /**
@@ -64,7 +66,12 @@ public abstract class SeleniumTest {
 
     @Before
     public void dbSetup(){
-        DbSetup dbSetup = new DbSetup(new DataSourceDestination(dataSource), CreateListsOperation.operation);
+        DbSetup dbSetup = new DbSetup(new DataSourceDestination(dataSource),
+                sequenceOf(
+                        ClearDatabaseOperation.operation,
+                        CreateListsOperation.operation
+                )
+        );
         dbSetup.launch();
     }
 

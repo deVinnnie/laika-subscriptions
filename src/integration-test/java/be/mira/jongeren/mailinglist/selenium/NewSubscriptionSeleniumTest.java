@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import static be.mira.jongeren.mailinglist.selenium.pages.SubscriptionCreationPage.SUBSCRIPTIONLIST_MAIN_SEQUENCE;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -39,7 +40,8 @@ public class NewSubscriptionSeleniumTest extends SeleniumTest {
         ActivationPage activationPage = page.submit();
 
         assertEquals(1, subscriberRepository.count());
-        Subscriber subscriber = subscriberRepository.findOne(1L);
+        Subscriber subscriber = subscriberRepository.findByEmail("luke.skywalker@galaxy.com");
+        assertFalse(subscriber.isActive());
 
         // 2. Activate with Token
         // Assume that mail would have been sent correctly.
@@ -47,7 +49,7 @@ public class NewSubscriptionSeleniumTest extends SeleniumTest {
                 .enterToken(subscriber.getToken())
                 .submit();
 
-        subscriber = subscriberRepository.findOne(1L);
+        subscriber = subscriberRepository.findByEmail("luke.skywalker@galaxy.com");
         assertTrue(subscriber.isActive());
 
         // 3. Trigger for SubscriptionEvent should have run.
