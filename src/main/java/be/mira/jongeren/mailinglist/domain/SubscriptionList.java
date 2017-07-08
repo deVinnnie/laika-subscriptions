@@ -6,6 +6,16 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+* Collection of all Subscribers interested in this subject.
+* 
+* In practice there will exist two lists, one for each age category:
+* - `main-sequence` : For ages 9 till 14.
+* - `supernova` : For ages 14 till 18 and above.
+*
+* A single Subscriber can appear in multiple SubscriptionLists.
+*
+*/
 @Entity
 public class SubscriptionList extends AbstractEntity{
 
@@ -13,7 +23,7 @@ public class SubscriptionList extends AbstractEntity{
     @NotEmpty
     private String title;
 
-    @OneToMany
+    @ManyToMany
     private List<Subscriber> subscribers = new ArrayList<>();
 
     public String getTitle() {
@@ -51,4 +61,11 @@ public class SubscriptionList extends AbstractEntity{
                 .count();
     }
 
+    @Override
+    public String toString() {
+        return "SubscriptionList{" +
+                "title='" + title + '\'' +
+                ", subscribers=" + subscribers +
+                '}';
+    }
 }

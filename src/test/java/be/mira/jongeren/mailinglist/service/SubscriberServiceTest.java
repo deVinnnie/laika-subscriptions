@@ -1,6 +1,7 @@
 package be.mira.jongeren.mailinglist.service;
 
 import be.mira.jongeren.mailinglist.common.MockMvcTest;
+import be.mira.jongeren.mailinglist.domain.Subscriber;
 import be.mira.jongeren.mailinglist.repository.SubscriberRepository;
 import be.mira.jongeren.mailinglist.repository.SubscriptionListRepository;
 import org.junit.Test;
@@ -52,5 +53,42 @@ public class SubscriberServiceTest extends MockMvcTest{
         subscriberService.unsubscribe(20L);
         assertEquals(0, subscriberRepository.count());
         assertEquals(0, subscriptionListRepository.findOne(10L).getSubscribers().size());
+    }
+
+    @Test
+    public void subscribeShouldAddSubscriberToAllLists(){
+        subscriberService.subscribe(
+                new Subscriber("Luke", "Skywalker", "luke@rebellion.org"),
+                new String[]{"supernova", "main-sequence"}
+            );
+
+        assertEquals(1, subscriberRepository.count());
+        subscriptionListRepository.findAll()
+            .forEach(
+                subscriptionList -> {
+                    assertEquals(1, subscriptionList.getSubscribers().size());
+                }
+            );
+    }
+
+    @Test
+    public void multipleSubscribersShouldBeAddedToAllLists(){
+        subscriberService.subscribe(
+                new Subscriber("Luke", "Skywalker", "luke@rebellion.org"),
+                new String[]{"supernova", "main-sequence"}
+        );
+
+        subscriberService.subscribe(
+                new Subscriber("Leia", "Organa", "leia@rebellion.org"),
+                new String[]{"supernova", "main-sequence"}
+        );
+
+        assertEquals(2, subscriberRepository.count());
+        subscriptionListRepository.findAll()
+                .forEach(
+                        subscriptionList -> {
+                            assertEquals(2, subscriptionList.getSubscribers().size());
+                        }
+                );
     }
 }
