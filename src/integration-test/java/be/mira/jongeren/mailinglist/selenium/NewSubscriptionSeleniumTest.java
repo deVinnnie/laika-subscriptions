@@ -12,6 +12,12 @@ import static be.mira.jongeren.mailinglist.selenium.pages.SubscriptionCreationPa
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+/**
+* Selenium test for the green path scenario.
+* 
+* A subscription to the main-sequence list and immediate activation with token.
+*
+*/
 public class NewSubscriptionSeleniumTest extends SeleniumTest {
 
     @Autowired
@@ -36,6 +42,7 @@ public class NewSubscriptionSeleniumTest extends SeleniumTest {
         Subscriber subscriber = subscriberRepository.findOne(1L);
 
         // 2. Activate with Token
+        // Assume that mail would have been sent correctly.
         SubscriptionCreationPage homePage = activationPage
                 .enterToken(subscriber.getToken())
                 .submit();
@@ -43,10 +50,10 @@ public class NewSubscriptionSeleniumTest extends SeleniumTest {
         subscriber = subscriberRepository.findOne(1L);
         assertTrue(subscriber.isActive());
 
-        // 4. Trigger for SubscriptionCount should have run.
+        // 3. Trigger for SubscriptionCount should have run.
         assertEquals(2, subscriptionCountRepository.count());
 
-        // 3. A green box should appear on the home page.
+        // 4. A green box should appear on the Home page.
         assertTrue(homePage.isCalloutPresent());
     }
 }
