@@ -11,6 +11,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
@@ -35,6 +36,10 @@ import static com.ninja_squad.dbsetup.Operations.sequenceOf;
 @ContextConfiguration(classes={Application.class}) // Spring Boot config (includes component scan)
 @Transactional // Enables rollback after each test.
 @ActiveProfiles({"development", "test"})
+@TestPropertySource(properties = {
+    "consult_user=dummy",
+    "consult_password=dummy"
+})
 public abstract class MockMvcTest {
 
     @Autowired

@@ -34,6 +34,12 @@ tasks.matching {it instanceof Test}.all {
                 println "Tests run: ${result.testCount} Failures: ${result.failedTestCount} Skipped: ${result.skippedTestCount}"
             }
         }
+
+
+        // Make sure output from
+        // standard out or error is shown
+        // in Gradle output.
+        //showStandardStreams = true
     }
 }
 

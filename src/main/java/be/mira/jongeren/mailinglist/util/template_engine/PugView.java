@@ -1,6 +1,7 @@
 package be.mira.jongeren.mailinglist.util.template_engine;
 
 import be.mira.jongeren.mailinglist.util.date.DateTimeFormatterHelper;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.servlet.View;
 import ro.pippo.jade.JadeTemplateEngine;
 
@@ -26,7 +27,7 @@ public class PugView implements View {
 
     @Override
     public void render(Map<String, ?> model, HttpServletRequest request, HttpServletResponse response) throws Exception {
-        modelFilter(model);
+        modelFilter(model, request, response);
 
 
         // Fix issue where browser (chrome) displays page source instead
@@ -36,8 +37,13 @@ public class PugView implements View {
     }
 
     // https://docs.oracle.com/javase/tutorial/java/generics/capture.html
-    private <T> void modelFilter(Map<String, T> model){
+    private <T> void modelFilter(Map<String, T> model, HttpServletRequest request, HttpServletResponse response){
         model.put("bindingResult", model.get("org.springframework.validation.BindingResult.subscriber"));
         model.put("dateHelper", (T) new DateTimeFormatterHelper());
+
+        final CsrfToken csrf = (CsrfToken) request.getAttribute("_csrf");
+        if(csrf != null) {
+            model.put("_csrf", (T) csrf.getToken());
+        }
     }
 }

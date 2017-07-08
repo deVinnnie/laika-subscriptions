@@ -15,6 +15,8 @@ block content
     p Schrijf je in op onze mailinglijst en dan houden wij je op de hoogte van het doen en laten van de Jeugdkern. Op deze manier mis je geen enkele activiteit!
 
     form.pure-form.pure-form-stacked#subscription_form(method="POST", action="/")
+        input(name="_csrf", type="hidden", value="#{_csrf}")
+
         label.required(for="email") E-mailadres
         input.pure-input-1(type="email", id="email" value="#{subscriber.email}", name="email", required)
         +errors('email')
