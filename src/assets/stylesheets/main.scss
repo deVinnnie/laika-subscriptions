@@ -2,17 +2,18 @@
 
 body{
     background: #123;
+    display: grid;
+    grid-template-columns: 1fr;
 }
 
 *{
     font-family: "OpenSans";
 }
 
-.content{
+.content {
     padding: 1em;
     background: #FFF;
     padding: 1em;
-    //padding-top: 0;
 }
 
 label.required:after{
@@ -29,7 +30,6 @@ form{
 
 .error{
     color: #9a043e;
-
 }
 
 pre{
@@ -43,4 +43,14 @@ pre{
     background-color: #f5f5f5;
     border: 1px solid #ccc;
     border-radius: 4px;
+}
+
+@media screen and (min-width: 900px){
+    body{
+        grid-template-columns: 1fr 3fr 1fr;
+    }
+
+    .content{
+        grid-column-start: 2;
+    }
 }
