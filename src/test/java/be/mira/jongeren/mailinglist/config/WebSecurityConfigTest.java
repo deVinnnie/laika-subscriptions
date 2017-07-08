@@ -8,8 +8,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
@@ -29,7 +28,10 @@ public class WebSecurityConfigTest {
     @Test
     public void requestOnProtectedPageRedirectsToLoginPage() throws Exception {
         ResponseEntity<String> response = restTemplate.getForEntity("/consult", String.class);
-        assertThat(response.getBody(), containsString("Please enter your username and password"));
+        assertThat(response.getBody(), anyOf(
+                is(nullValue()),
+                containsString("Please enter your username and password")
+        ));
     }
 
     @Test
