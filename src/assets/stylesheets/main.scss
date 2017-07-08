@@ -2,6 +2,12 @@
 
 body{
     background: #123;
+    background-image:
+        linear-gradient(
+            rgba(11, 22, 33, 0.2),
+            rgba(11, 22, 33, 0.2)
+        ),
+        url('/assets/footer_lodyas.png');
     display: grid;
     grid-template-columns: 1fr;
 }
