@@ -12,6 +12,11 @@ jar {
     version =  '1.0-SNAPSHOT'
 }
 
+ext {
+    springBootVersion = '1.5.2.RELEASE'
+    seleniumVersion = '3.3.1'
+}
+
 group = 'be.mira.jongeren'
 version = '1.0-SNAPSHOT'
 
@@ -80,15 +85,15 @@ task integrationTest(type: Test) {
 
 dependencies {
     // Spring Boot
-    compile(group: 'org.springframework.boot', name: 'spring-boot-starter', version:'1.5.2.RELEASE') {
+    compile(group: 'org.springframework.boot', name: 'spring-boot-starter', version:"${springBootVersion}") {
         exclude(module: 'logback-classic')
     }
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version:'1.5.2.RELEASE'
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version:'1.5.2.RELEASE'
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-aop', version:'1.5.2.RELEASE'
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version:'1.5.2.RELEASE'
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version:'1.5.2.RELEASE'
-    compile group: 'org.springframework.boot', name: 'spring-boot-devtools', version:'1.5.2.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version:"${springBootVersion}"
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version:"${springBootVersion}"
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-aop', version:"${springBootVersion}"
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version:"${springBootVersion}"
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version:"${springBootVersion}"
+    compile group: 'org.springframework.boot', name: 'spring-boot-devtools', version:"${springBootVersion}"
 
     // DB
     compile group: 'com.h2database', name: 'h2', version:'1.4.192'
@@ -106,12 +111,12 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version:'4.12'
     testCompile group: 'com.icegreen', name: 'greenmail', version:'1.5.5'
     testCompile group: 'com.ninja-squad', name: 'DbSetup', version:'2.1.0'
-    testCompile(group: 'org.springframework.boot', name: 'spring-boot-starter-test', version:'1.5.2.RELEASE') {
+    testCompile(group: 'org.springframework.boot', name: 'spring-boot-starter-test', version:"${springBootVersion}") {
         exclude(module: 'commons-logging')
     }
 
-    integrationTestCompile group: 'org.seleniumhq.selenium', name: 'selenium-java', version:'3.3.1'
-    integrationTestCompile group: 'org.seleniumhq.selenium', name: 'selenium-support', version:'3.3.1'
+    integrationTestCompile group: 'org.seleniumhq.selenium', name: 'selenium-java', version:"${seleniumVersion}"
+    integrationTestCompile group: 'org.seleniumhq.selenium', name: 'selenium-support', version:"${seleniumVersion}"
 
     // Assets Pipeline
     //runtime 'com.bertramlabs.plugins:asset-pipeline-spring-boot:2.13.1'
