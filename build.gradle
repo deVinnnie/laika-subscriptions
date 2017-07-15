@@ -26,7 +26,12 @@ tasks.withType(JavaCompile) {
 
 tasks.matching {it instanceof Test}.all {
     testLogging{
-        events = ["failed", "passed", "skipped"]
+        afterTest { desc, result ->
+            // Display the simple Class name.
+            def match = desc.className =~ /.*\.(\p{Lu}.*)$/
+            def className = match.getAt(0).getAt(1)
+            logger.quiet "[${result.resultType}] ${className} > ${desc.name}"
+        }
 
         afterSuite { desc, result ->
             // Match the outermost suite
