@@ -5,9 +5,19 @@ block variables
 
 
 block content
+    script
+        | function copy(id) {
+        |   var element = document.getElementById(id);
+        |   var range = document.createRange();
+        |   range.selectNode(element);
+        |   window.getSelection().addRange(range);
+        |   document.execCommand('copy');
+        |   window.getSelection().empty();
+        | }
     each subscriptionList in subscriptionLists
         h1 #{pippo.i18n(subscriptionList.title)}
-        a(href="/consult/history/#{subscriptionList.id}") Geschiedenis
+        a.pure-button(href="/consult/history/#{subscriptionList.id}") Geschiedenis
+        button.pure-button(onclick="copy('#{subscriptionList.title}-raw')") Kopieër naar Klembord
 
         table.pure-table.pure-table-striped
             thead
@@ -23,7 +33,7 @@ block content
                         td #{subscriber.achternaam}
 
 
-        pre
+        pre(id="#{subscriptionList.title}-raw")
             each subscriber, i in subscriptionList.subscribers
                 //- Avoid leading comma-sign.
                 if i == 0

@@ -137,6 +137,7 @@ jacocoTestReport {
 }
 
 bootRun {
+    args = ["--spring.profiles.active=development,disable-security"]
     addResources = true
 }
 
