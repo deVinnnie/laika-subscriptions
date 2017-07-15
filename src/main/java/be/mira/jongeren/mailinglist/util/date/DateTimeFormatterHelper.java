@@ -1,6 +1,5 @@
 package be.mira.jongeren.mailinglist.util.date;
 
-import java.text.DateFormat;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAccessor;
 
