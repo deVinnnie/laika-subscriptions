@@ -57,6 +57,10 @@ task wrapper(type: Wrapper) {
     gradleVersion = '3.5'
 }
 
+// Heroku Stuff
+task stage(dependsOn: ['build', 'clean'])
+build.mustRunAfter clean
+
 repositories {
      maven { url "http://repo.maven.apache.org/maven2" }
 }
