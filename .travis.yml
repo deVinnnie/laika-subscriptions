@@ -28,3 +28,9 @@ notifications:
 
     on_success: change
     on_failure: always
+
+deploy:
+  provider: heroku
+  api-key:
+    secure: $HEROKU_API_KEY
+  app: mirajeugdkern-mailinglist
