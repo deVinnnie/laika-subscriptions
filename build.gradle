@@ -58,7 +58,10 @@ task wrapper(type: Wrapper) {
 }
 
 // Heroku Stuff
-task stage(dependsOn: ['build', 'clean'])
+task stage(dependsOn: ['build', 'clean']) {
+    gradle.startParameter.excludedTaskNames << "test"
+}
+
 build.mustRunAfter clean
 
 repositories {
