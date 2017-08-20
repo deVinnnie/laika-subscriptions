@@ -3,7 +3,7 @@ package be.mira.jongeren.mailinglist.mail;
 public class ActivationMailTemplate {
 
     private String template = "Beste, \n" +
-            "Je hebt je ingescreven op onze mailinglijst. (Als je dit niet gedaan hebt, dan kan je deze mail negeren.)\n" +
+            "Je hebt je ingeschreven op onze mailinglijst. (Als je dit niet gedaan hebt, dan kan je deze mail negeren.)\n" +
             "\n" +
             "Om je inschrijving te voltooien moet je volgende activatiecode: %s\n" +
             "kopiëren op deze pagina: \n" +
