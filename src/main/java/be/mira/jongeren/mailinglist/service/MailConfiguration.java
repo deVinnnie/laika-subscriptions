@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class MailConfiguration {
 
-    @Value("spring.mail.from")
+    @Value("${spring.mail.from}")
     public String fromMailAddress;
 
     public String subject = "[MIRA Jeugdkern] Mailinglijst Inschrijving";

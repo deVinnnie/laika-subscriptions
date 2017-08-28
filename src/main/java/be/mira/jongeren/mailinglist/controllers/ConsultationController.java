@@ -3,6 +3,7 @@ package be.mira.jongeren.mailinglist.controllers;
 import be.mira.jongeren.mailinglist.domain.SubscriptionList;
 import be.mira.jongeren.mailinglist.repository.SubscriptionEventRepository;
 import be.mira.jongeren.mailinglist.repository.SubscriptionListRepository;
+import be.mira.jongeren.mailinglist.service.MailConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,10 +21,14 @@ public class ConsultationController {
     @Autowired
     private SubscriptionEventRepository subscriptionEventRepository;
 
+    @Autowired
+    private MailConfiguration mailConfiguration;
+
     @RequestMapping(method= RequestMethod.GET)
     public ModelAndView index(){
         ModelAndView mav = new ModelAndView("consult/index");
         mav.addObject("subscriptionLists", subscriptionListRepository.findAll());
+        mav.addObject("configurationEmail", mailConfiguration.fromMailAddress);
         return mav;
     }
 
