@@ -8,3 +8,4 @@ build/
 .gradle/
 test.db
 .asscache
+out/

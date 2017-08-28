@@ -30,7 +30,10 @@ public class MailSenderImplTest {
         javaMailSender.setUsername("user");
         javaMailSender.setPassword("user");
 
-        MailSender mailSender = new MailSenderImpl(javaMailSender, "laika");
+        MailConfiguration mailConfiguration = new MailConfiguration();
+        mailConfiguration.fromMailAddress="laika";
+        mailConfiguration.subject="";
+        MailSender mailSender = new MailSenderImpl(javaMailSender, mailConfiguration);
         mailSender.send("laika", "Hello World");
 
         MimeMessage[] emails = greenMail.getReceivedMessages();

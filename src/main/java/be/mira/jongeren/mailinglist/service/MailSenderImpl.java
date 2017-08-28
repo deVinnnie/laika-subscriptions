@@ -1,7 +1,6 @@
 package be.mira.jongeren.mailinglist.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -10,27 +9,25 @@ import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Component;
 
 @Component
-@Profile("production")
+@Profile("smtp")
 public class MailSenderImpl implements MailSender{
 
     private JavaMailSender mailSender;
-
-    private String fromMailAddress;
+    private MailConfiguration mailConfiguration;
 
     @Autowired
-    public MailSenderImpl(JavaMailSender mailSender,
-                          @Value("spring.mail.from") String fromMailAddress) {
+    public MailSenderImpl(JavaMailSender mailSender, MailConfiguration mailConfiguration) {
         this.mailSender = mailSender;
-        this.fromMailAddress = fromMailAddress;
+        this.mailConfiguration = mailConfiguration;
     }
 
     public void send(String toMailAddress, String body){
         // Send mail.
         MimeMessagePreparator messagePreparator = mimeMessage -> {
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
-            messageHelper.setFrom(fromMailAddress);
+            messageHelper.setFrom(mailConfiguration.fromMailAddress);
             messageHelper.setTo(toMailAddress);
-            messageHelper.setSubject("[MIRA Jeugdkern] Mailinglijst Inschrijving");
+            messageHelper.setSubject(mailConfiguration.subject);
             messageHelper.setText(body);
         };
         try {

@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 @Component
-@Profile("!production")
+@Profile({"mock"})
 public class MailSenderMock implements MailSender{
 
     public void send(String toMailAddress, String body){
