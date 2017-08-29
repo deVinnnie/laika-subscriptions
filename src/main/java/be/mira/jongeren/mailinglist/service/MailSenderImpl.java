@@ -33,6 +33,7 @@ public class MailSenderImpl implements MailSender{
         try {
             mailSender.send(messagePreparator);
         } catch (MailException e) {
+            e.printStackTrace();
             // runtime exception; compiler will not force you to handle it
         }
     }
