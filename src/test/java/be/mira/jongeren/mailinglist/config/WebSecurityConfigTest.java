@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.hamcrest.CoreMatchers.*;
@@ -20,6 +21,7 @@ import static org.junit.Assert.assertTrue;
                 "consult_user=dummy",
                 "consult_password=dummy"
         })
+@ActiveProfiles({"development", "test","mock"})
 public class WebSecurityConfigTest {
 
     @Autowired

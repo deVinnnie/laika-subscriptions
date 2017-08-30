@@ -35,10 +35,11 @@ import static com.ninja_squad.dbsetup.Operations.sequenceOf;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes={Application.class}) // Spring Boot config (includes component scan)
 @Transactional // Enables rollback after each test.
-@ActiveProfiles({"development", "test"})
+@ActiveProfiles({"development", "test", "mock"})
 @TestPropertySource(properties = {
     "consult_user=dummy",
-    "consult_password=dummy"
+    "consult_password=dummy",
+    "spring.mail.from=laika"
 })
 public abstract class MockMvcTest {
 
