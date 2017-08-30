@@ -6,7 +6,7 @@ public class ActivationMailTemplate {
             "Je hebt je ingeschreven op onze mailinglijst. (Als je dit niet gedaan hebt, dan kan je deze mail negeren.)\n" +
             "\n" +
             "Om je inschrijving te voltooien moet je volgende activatiecode: %s\n" +
-            "kopiëren op deze pagina: \n" +
+            "kopiëren op deze pagina: %s\n" +
             "\n" +
             "Met Vriendelijke Groeten,\n" +
             "Laika.\n" +
@@ -14,11 +14,10 @@ public class ActivationMailTemplate {
             "--\n" +
             "Laika is de automatische mailer van de MIRA Jeugdkern. Laika is heel verlegen en antwoord daarom niet op mails.\n";
 
-    public String format(String token){
-        if(token == null){
+    public String format(String token, String activationPageLink){
+        if(token == null || activationPageLink == null){
             return null;
         }
-        String body = String.format(template, token);
-        return body;
+        return String.format(template, token, activationPageLink);
     }
 }

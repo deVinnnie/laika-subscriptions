@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.time.LocalDateTime;
 import java.util.Iterator;
 import java.util.List;
@@ -52,7 +54,12 @@ public class SubscriberServiceImpl implements SubscriberService {
 
         // Prepare Mail
         ActivationMailTemplate mailTemplate = new ActivationMailTemplate();
-        String body = mailTemplate.format(subscriber.getToken());
+        String body = null;
+        try {
+            body = mailTemplate.format(subscriber.getToken(), InetAddress.getLocalHost().getHostName()+"/activate/"+subscriber.getId());
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
 
         mailSender.send(subscriber.getEmail(), body);
     }
