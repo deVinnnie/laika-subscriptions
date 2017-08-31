@@ -36,7 +36,7 @@ public class SubscriberServiceImpl implements SubscriberService {
         this.mailSender = mailSender;
     }
 
-    public void subscribe(Subscriber subscriber, String[] lists){
+    public Subscriber subscribe(Subscriber subscriber, String[] lists){
         // Set the current date as subscription date.
         subscriber.setSubscriptionDate(LocalDateTime.now());
 
@@ -53,15 +53,16 @@ public class SubscriberServiceImpl implements SubscriberService {
         }
 
         // Prepare Mail
-        ActivationMailTemplate mailTemplate = new ActivationMailTemplate();
+        /*ActivationMailTemplate mailTemplate = new ActivationMailTemplate();
         String body = null;
         try {
             body = mailTemplate.format(subscriber.getToken(), InetAddress.getLocalHost().getHostName()+"/activate/"+subscriber.getId());
         } catch (UnknownHostException e) {
             e.printStackTrace();
-        }
+        }*/
 
-        mailSender.send(subscriber.getEmail(), body);
+        //mailSender.send(subscriber.getEmail(), body);
+        return subscriber;
     }
 
     @Override

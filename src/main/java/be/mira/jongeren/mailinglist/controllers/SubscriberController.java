@@ -39,7 +39,7 @@ public class SubscriberController {
     }
 
     @RequestMapping(method= RequestMethod.POST)
-    public ModelAndView addSubscriber(@Valid Subscriber subscriber, BindingResult result, @RequestParam(value = "lists", required = false) String[] lists){
+    public ModelAndView addSubscriber(@Valid Subscriber subscriber, BindingResult result, @RequestParam(value = "lists", required = false) String[] lists, RedirectAttributes redirectAttributes){
         if(lists == null || lists.length == 0){
             ModelAndView mav = this.subscriptionPage(subscriber);
             mav.setStatus(HttpStatus.BAD_REQUEST);
@@ -53,9 +53,11 @@ public class SubscriberController {
         }
 
 
-        this.subscriberService.subscribe(subscriber, lists);
+        Subscriber subscribed = this.subscriberService.subscribe(subscriber, lists);
 
-        ModelAndView mav = new ModelAndView("redirect:/activate/"+subscriber.getId());
+
+        ModelAndView mav = this.activateSubscriber(subscribed.getId(), subscribed.getToken(), redirectAttributes);
+        //ModelAndView mav = new ModelAndView("redirect:/activate/"+subscriber.getId());
         return mav;
     }
 
