@@ -91,22 +91,21 @@ public class SubscriberController {
         return mav;
     }
 
-    @RequestMapping(path = "/unsubscribe", method= RequestMethod.GET, headers = "Referer=http://localhost:8080/unsubscribe")
-    public ModelAndView succesfulUnsubscription(){
-        ModelAndView mav = new ModelAndView("subscribers/unsubscribe");
-        mav.addObject("unsubscribed", true);
-        return mav;
-    }
+//    @RequestMapping(path = "/unsubscribe", method= RequestMethod.GET, headers = "Referer=${server.host}/unsubscribe")
+//    public ModelAndView succesfulUnsubscription(){
+//        ModelAndView mav = new ModelAndView("subscribers/unsubscribe");
+//        mav.addObject("unsubscribed", true);
+//        return mav;
+//    }
 
     @RequestMapping(path = "/unsubscribe", method= RequestMethod.POST)
     public ModelAndView unsubscribe(String email) {
+        ModelAndView mav = new ModelAndView("subscribers/unsubscribe");
         Subscriber subscriber = subscriberRepository.findByEmail(email);
         if(subscriber != null) {
             subscriberService.unsubscribe(subscriber);
+            mav.addObject("unsubscribed", true);
         }
-
-        ModelAndView mav = new ModelAndView("redirect:/unsubscribe");
-
         return mav;
     }
 }
