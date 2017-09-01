@@ -6,6 +6,6 @@ build/
 *.settings
 *.classpath
 .gradle/
-test.db
 .asscache
 out/
+migration/
