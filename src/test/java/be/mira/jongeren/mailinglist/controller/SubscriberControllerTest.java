@@ -41,8 +41,26 @@ public class SubscriberControllerTest extends MockMvcTest {
 
         Subscriber persistedSubscriber = subscriberRepository.findAll().get(0);
 
-        assertFalse(persistedSubscriber.isActive());
+        // TODO: Activate when mailing works
+        // assertFalse(persistedSubscriber.isActive());
         assertNotNull(persistedSubscriber.getToken());
+    }
+
+    @Test
+    public void addSubscriberWithExistingEmailGives409() throws Exception {
+        addSubscriberAddsNewEntity();
+        mockMvc()
+                .perform(
+                        post("/")
+                                .param("voornaam", "Luke")
+                                .param("achternaam", "Skywalker")
+                                .param("email", "luke.skywalker@rebellion.org")
+                                .param("lists", "main-sequence", "supernova")
+                                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                )
+                .andExpect(status().is4xxClientError());
+
+        assertThat(subscriberRepository.findAll(), hasSize(equalTo(1)));
     }
 
     @Test

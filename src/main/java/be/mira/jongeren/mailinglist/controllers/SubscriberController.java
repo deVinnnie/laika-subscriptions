@@ -52,6 +52,12 @@ public class SubscriberController {
             return mav;
         }
 
+        if(subscriberRepository.findByEmail(subscriber.getEmail()) != null){
+            ModelAndView mav = this.subscriptionPage(subscriber);
+            mav.setStatus(HttpStatus.CONFLICT);
+            result.rejectValue("email", "email.duplicate", "email.duplicate");
+            return mav;
+        }
 
         Subscriber subscribed = this.subscriberService.subscribe(subscriber, lists);
 
