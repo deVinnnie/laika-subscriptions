@@ -53,9 +53,9 @@ public class SubscriptionCreationPage extends PageObject{
         return this;
     }
 
-    public ActivationPage submit(){
+    public SubscriptionCreationPage submit(){
         this.formElement.submit();
-        return new ActivationPage(driver());
+        return new SubscriptionCreationPage(driver());
     }
 
     public boolean isCalloutPresent() {

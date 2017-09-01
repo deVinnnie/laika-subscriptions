@@ -37,17 +37,18 @@ public class NewSubscriptionSeleniumTest extends SeleniumTest {
             .enterLastName("Skywalker")
             .checkSubscriptionList(SUBSCRIPTIONLIST_MAIN_SEQUENCE);
 
-        ActivationPage activationPage = page.submit();
+        //ActivationPage activationPage = page.submit();
+        SubscriptionCreationPage homePage = page.submit();
 
         assertEquals(1, subscriberRepository.count());
         Subscriber subscriber = subscriberRepository.findByEmail("luke.skywalker@galaxy.com");
-        assertFalse(subscriber.isActive());
+        //assertFalse(subscriber.isActive());
 
         // 2. Activate with Token
         // Assume that mail would have been sent correctly.
-        SubscriptionCreationPage homePage = activationPage
-                .enterToken(subscriber.getToken())
-                .submit();
+        //SubscriptionCreationPage homePage = activationPage
+        //        .enterToken(subscriber.getToken())
+        //        .submit();
 
         subscriber = subscriberRepository.findByEmail("luke.skywalker@galaxy.com");
         assertTrue(subscriber.isActive());

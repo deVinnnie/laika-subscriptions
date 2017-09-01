@@ -46,7 +46,7 @@ import static org.junit.Assume.assumeTrue;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @ContextConfiguration(classes={Application.class})
-@ActiveProfiles({"development", "test"})
+@ActiveProfiles({"development", "test", "mock"})
 public abstract class SeleniumTest {
 
     private static WebDriver driver;
