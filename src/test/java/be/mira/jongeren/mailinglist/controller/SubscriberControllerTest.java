@@ -221,7 +221,7 @@ public class SubscriberControllerTest extends MockMvcTest {
                     .contentType(MediaType.APPLICATION_FORM_URLENCODED)
             )
             .andExpect(
-                status().is3xxRedirection()
+                status().is2xxSuccessful()
             );
 
         assertEquals(0, subscriberRepository.count());
@@ -235,18 +235,22 @@ public class SubscriberControllerTest extends MockMvcTest {
                     .param("email", "han@solo.org")
                     .contentType(MediaType.APPLICATION_FORM_URLENCODED)
             )
-            .andExpect(status().is3xxRedirection());
+            .andExpect(status().is2xxSuccessful());
     }
 
     @Test
     public void redirectPageAfterUnsubscribeContainsCallout() throws Exception{
+        // Prepare test subscriber.
+        Subscriber subscriber = new Subscriber("Luke", "Skywalker", "luke.skywalker@rebellion.org");
+        subscriberRepository.save(subscriber);
+
         mockMvc()
-            .perform(
-                get("/unsubscribe/")
-                    .header("Referer", "http://localhost:8080/unsubscribe")
-                    .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            )
-            .andExpect(status().is2xxSuccessful())
-            .andExpect(content().string(containsString("callout")));
+                .perform(
+                        post("/unsubscribe/")
+                                .param("email", subscriber.getEmail())
+                                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                )
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(content().string(containsString("callout")));
     }
 }
