@@ -61,6 +61,10 @@ public class SubscriptionList extends AbstractEntity{
                 .count();
     }
 
+    public long getCount(){
+        return count();
+    }
+
     @Override
     public String toString() {
         return "SubscriptionList{" +

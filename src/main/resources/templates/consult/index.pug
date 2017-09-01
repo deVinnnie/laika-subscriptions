@@ -17,7 +17,7 @@ block content
         |   window.getSelection().empty();
         | }
     each subscriptionList in subscriptionLists
-        h1 #{pippo.i18n(subscriptionList.title)}
+        h1 #{pippo.i18n(subscriptionList.title)} [#{subscriptionList.count}]
         a.pure-button(href="/consult/history/#{subscriptionList.id}") Geschiedenis
         button.pure-button(onclick="copy('#{subscriptionList.title}-raw')") Kopieër naar Klembord
 
