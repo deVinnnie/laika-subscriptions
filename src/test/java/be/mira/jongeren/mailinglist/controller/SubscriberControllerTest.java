@@ -107,6 +107,25 @@ public class SubscriberControllerTest extends MockMvcTest {
         assertEquals(0, subscriberRepository.count());
     }
 
+
+    @Test
+    public void addSubscriberWithInvalidEmailAddressGives400() throws Exception {
+        mockMvc()
+                .perform(
+                        post("/")
+                                .param("voornaam", "Luke")
+                                .param("achternaam", "Skywalker")
+                                .param("email", "luke")
+                                .param("lists", "main-sequence", "supernova")
+                                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                )
+                .andExpect(status().is4xxClientError())
+                .andExpect(view().name(containsString("index")));
+
+        assertEquals(0, subscriberRepository.count());
+    }
+
+
     @Test
     public void activateSubscriberWithCorrectTokenChangesState() throws Exception{
         // Prepare test subscriber.
