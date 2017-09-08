@@ -58,7 +58,7 @@ task wrapper(type: Wrapper) {
 }
 
 // Heroku Stuff
-task stage(dependsOn: ['assemble', 'clean']) {
+task stage(dependsOn: ['assemble']) {
 }
 
 build.mustRunAfter clean
