@@ -2,7 +2,7 @@ plugins {
     id 'java'
     id 'jacoco'
     id 'idea'
-    id 'org.springframework.boot' version '1.5.12.RELEASE'
+    id 'org.springframework.boot' version '1.5.13.RELEASE'
     id "com.bertramlabs.asset-pipeline" version '2.13.1'
     id 'com.github.kt3k.coveralls' version '2.8.1'
 }
@@ -13,7 +13,7 @@ jar {
 }
 
 ext {
-    springBootVersion = '1.5.12.RELEASE'
+    springBootVersion = '1.5.13.RELEASE'
     seleniumVersion = '3.3.1'
 }
 
