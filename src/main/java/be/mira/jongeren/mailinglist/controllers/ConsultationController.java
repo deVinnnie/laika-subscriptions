@@ -35,7 +35,7 @@ public class ConsultationController {
     @RequestMapping(method= RequestMethod.GET, value="/history/{id}")
     public ModelAndView history(@PathVariable("id") Long id){
         ModelAndView mav = new ModelAndView("consult/history");
-        SubscriptionList list = subscriptionListRepository.findOne(id);
+        SubscriptionList list = subscriptionListRepository.getOne(id);
         mav.addObject("subscriptionEvents", subscriptionEventRepository.findBySubscriptionList(list));
         return mav;
     }

@@ -62,8 +62,8 @@ public class SubscriberController {
         Subscriber subscribed = this.subscriberService.subscribe(subscriber, lists);
 
 
-        ModelAndView mav = this.activateSubscriber(subscribed.getId(), subscribed.getToken(), redirectAttributes);
-        //ModelAndView mav = new ModelAndView("redirect:/activate/"+subscriber.getId());
+        //ModelAndView mav = this.activateSubscriber(subscribed.getId(), subscribed.getToken(), redirectAttributes);
+        ModelAndView mav = new ModelAndView("redirect:/activate/"+subscriber.getId());
         return mav;
     }
 
@@ -82,7 +82,7 @@ public class SubscriberController {
         boolean activated = subscriberService.activate(id, token);
 
         if(activated) {
-            redirectAttributes.addFlashAttribute("subscriber", subscriberRepository.findOne(id));
+            redirectAttributes.addFlashAttribute("subscriber", subscriberRepository.getOne(id));
             ModelAndView mav = new ModelAndView("redirect:/");
             return mav;
         }

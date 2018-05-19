@@ -52,7 +52,7 @@ public class SubscriberServiceTest extends MockMvcTest{
 
         subscriberService.unsubscribe(20L);
         assertEquals(0, subscriberRepository.count());
-        assertEquals(0, subscriptionListRepository.findOne(10L).getSubscribers().size());
+        assertEquals(0, subscriptionListRepository.getOne(10L).getSubscribers().size());
     }
 
     @Test

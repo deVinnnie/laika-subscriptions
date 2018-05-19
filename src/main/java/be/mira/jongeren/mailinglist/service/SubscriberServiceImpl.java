@@ -79,7 +79,7 @@ public class SubscriberServiceImpl implements SubscriberService {
 
     @Override
     public void unsubscribe(Long id){
-        unsubscribe(subscriberRepository.findOne(id));
+        unsubscribe(subscriberRepository.getOne(id));
     }
 
     public boolean activate(Long id, String token){
