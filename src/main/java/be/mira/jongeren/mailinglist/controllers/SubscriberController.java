@@ -62,8 +62,8 @@ public class SubscriberController {
         Subscriber subscribed = this.subscriberService.subscribe(subscriber, lists);
 
 
-        //ModelAndView mav = this.activateSubscriber(subscribed.getId(), subscribed.getToken(), redirectAttributes);
-        ModelAndView mav = new ModelAndView("redirect:/activate/"+subscriber.getId());
+        ModelAndView mav = this.activateSubscriber(subscribed.getId(), subscribed.getToken(), redirectAttributes);
+        //ModelAndView mav = new ModelAndView("redirect:/activate/"+subscriber.getId());
         return mav;
     }
 
