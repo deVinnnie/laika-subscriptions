@@ -105,7 +105,7 @@ dependencies {
 
     // Other
     compile group: 'commons-lang', name: 'commons-lang', version:'2.6'
-    compile group: 'ro.pippo', name: 'pippo-jade', version:'1.3.0'
+    compile group: 'ro.pippo', name: 'pippo-jade', version:'1.9.0'
 
     // CSS Libs: PureCSS
     //compile group: 'org.webjars', name: 'webjars-locator', version:'0.30'
@@ -124,7 +124,7 @@ dependencies {
 
     // Assets Pipeline
     //runtime 'com.bertramlabs.plugins:asset-pipeline-spring-boot:2.13.1'
-    assets 'com.bertramlabs.plugins:sass-asset-pipeline:2.13.1'
+    assets('com.bertramlabs.plugins:sass-asset-pipeline:2.14.10')
 }
 
 assets {
