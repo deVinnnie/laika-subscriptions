@@ -60,6 +60,7 @@ task stage(dependsOn: ['assemble']) {
 }
 
 build.mustRunAfter clean
+bootJar.mustRunAfter assetCompile
 
 repositories {
      maven { url "http://repo.maven.apache.org/maven2" }
