@@ -118,8 +118,9 @@ dependencies {
     testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version:"${springBootVersion}"
 
     // Assets Pipeline
-    //runtime 'com.bertramlabs.plugins:asset-pipeline-spring-boot:2.13.1'
-    assets('com.bertramlabs.plugins:sass-asset-pipeline:2.14.10')
+    assets('com.bertramlabs.plugins:sass-asset-pipeline:2.14.10'){
+        exclude group: 'log4j', module: 'log4j'
+    }
     compile 'com.google.code.gson:gson:2.8.4' // Fixes conflict with Spring-Boot
 
     integrationTestCompile group: 'org.seleniumhq.selenium', name: 'selenium-java', version:"${seleniumVersion}"
