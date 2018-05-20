@@ -108,7 +108,6 @@ dependencies {
     compile group: 'ro.pippo', name: 'pippo-jade', version:'1.9.0'
 
     // CSS Libs: PureCSS
-    //compile group: 'org.webjars', name: 'webjars-locator', version:'0.30'
     compile group: 'org.webjars.npm', name: 'purecss', version:'0.6.0'
 
     // Test Dependencies
@@ -134,13 +133,14 @@ assets {
     minifyCss = true
     enableSourceMaps = true
     enableDigests = false
-    enableGzip = true
-    maxThreads = 2
+    enableGzip = false
+    maxThreads = 1
     
     includes = ["fonts/*"]
+    excludes = ['**/build/*','**/*.json', '**/*.md']
 
     //developmentRuntime can be turned off
-    developmentRuntime=true
+    developmentRuntime=false
 }
 
 jacocoTestReport {
