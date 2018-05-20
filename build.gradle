@@ -7,6 +7,9 @@ plugins {
     id 'com.github.kt3k.coveralls' version '2.8.1'
 }
 
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
 jar {
     baseName = 'laika-subscriptions'
     version =  '1.0-SNAPSHOT'
@@ -90,15 +93,12 @@ task integrationTest(type: Test) {
 
 dependencies {
     // Spring Boot
-    compile(group: 'org.springframework.boot', name: 'spring-boot-starter', version:"${springBootVersion}") {
-        exclude(module: 'logback-classic')
-    }
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version:"${springBootVersion}"
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version:"${springBootVersion}"
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-aop', version:"${springBootVersion}"
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version:"${springBootVersion}"
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version:"${springBootVersion}"
-    compile group: 'org.springframework.boot', name: 'spring-boot-devtools', version:"${springBootVersion}"
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.springframework.boot:spring-boot-starter-aop'
+    compile 'org.springframework.boot:spring-boot-starter-mail'
+    compile 'org.springframework.boot:spring-boot-starter-security'
+    compile 'org.springframework.boot:spring-boot-devtools'
 
     // DB
     compile group: 'com.h2database', name: 'h2', version:'1.4.197'
