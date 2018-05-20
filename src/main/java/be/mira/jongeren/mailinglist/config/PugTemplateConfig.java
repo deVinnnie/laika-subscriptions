@@ -18,7 +18,7 @@ public class PugTemplateConfig {
     public JadeTemplateEngine jadeTemplateEngine(){
         JadeTemplateEngine templateEngine = new JadeTemplateEngine();
 
-        PippoSettings pippoSettings = new PippoSettings(RuntimeMode.DEV);
+        PippoSettings pippoSettings = new PippoSettings(RuntimeMode.PROD);
         pippoSettings.overrideSetting(PippoConstants.SETTING_TEMPLATE_PATH_PREFIX, "/templates");
 
         templateEngine.setFileExtension("pug");
