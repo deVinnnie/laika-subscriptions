@@ -57,7 +57,7 @@ public class SubscriptionList extends AbstractEntity{
     public long count(){
         return this.subscribers
                 .stream()
-                .filter(s -> s.isActive())
+                .filter(Subscriber::isActive)
                 .count();
     }
 
