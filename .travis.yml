@@ -19,7 +19,7 @@ jdk:
 install: true
 
 before_install: "gradle wrapper"
-script: "./gradlew --stacktrace clean build jacocoTestReport coveralls"
+script: "./gradlew --stacktrace clean build integrationTest jacocoTestReport coveralls"
 
 notifications:
   email:
