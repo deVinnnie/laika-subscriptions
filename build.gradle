@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'groovy'
     id 'jacoco'
     id 'idea'
     id 'org.springframework.boot' version '2.0.2.RELEASE'
@@ -18,6 +19,7 @@ jar {
 ext {
     springBootVersion = '2.0.2.RELEASE'
     seleniumVersion = '3.12.0'
+    gebVersion = "2.1"
 }
 
 group = 'be.mira.jongeren'
@@ -71,10 +73,10 @@ repositories {
 
 sourceSets {
     integrationTest {
-        java {
+        groovy{
             compileClasspath += main.output + test.output
             runtimeClasspath += main.output + test.output
-            srcDirs file('src/integration-test/java')
+            srcDirs file('src/integration-test/groovy')
         }
         resources.srcDir file('src/integration-test/resources')
     }
@@ -98,7 +100,7 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter-aop'
     compile 'org.springframework.boot:spring-boot-starter-mail'
     compile 'org.springframework.boot:spring-boot-starter-security'
-    compile 'org.springframework.boot:spring-boot-devtools'
+//    compile 'org.springframework.boot:spring-boot-devtools'
 
     // DB
     compile group: 'com.h2database', name: 'h2', version:'1.4.197'
@@ -124,6 +126,15 @@ dependencies {
 
     integrationTestCompile group: 'org.seleniumhq.selenium', name: 'selenium-java', version:"${seleniumVersion}"
     integrationTestCompile  'com.google.code.gson:gson:2.8.2' // Fixes conflict with Spring-Boot
+
+
+    // ---------------------------------------------
+    // Geb
+    // ---------------------------------------------
+    integrationTestCompile "org.codehaus.groovy:groovy-all:2.4.12"
+    integrationTestCompile "org.seleniumhq.selenium:htmlunit-driver:2.29.0"
+    integrationTestCompile "org.seleniumhq.selenium:selenium-chrome-driver:${seleniumVersion}"
+    integrationTestCompile "org.gebish:geb-junit4:${gebVersion}"
 }
 
 assets {
@@ -159,6 +170,7 @@ idea {
     module {
         //and some extra test source dirs
         testSourceDirs += file('src/integration-test/java')
+        testSourceDirs += file('src/integration-test/groovy')
         //generatedSourceDirs += file('some-extra-source-folder')
         //scopes.TEST.plus += [ configurations.integrationTest ]
         scopes.TEST.plus += [ configurations.integrationTestCompile ]
