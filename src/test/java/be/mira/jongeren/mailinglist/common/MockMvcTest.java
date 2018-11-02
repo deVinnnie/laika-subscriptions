@@ -6,13 +6,13 @@ import be.mira.jongeren.mailinglist.util.CreateListsOperation;
 import com.ninja_squad.dbsetup.DbSetup;
 import com.ninja_squad.dbsetup.destination.DataSourceDestination;
 import com.ninja_squad.dbsetup.operation.Operation;
-import org.junit.Before;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -32,7 +32,7 @@ import static com.ninja_squad.dbsetup.Operations.sequenceOf;
  *
  */
 @WebAppConfiguration
-@RunWith(SpringJUnit4ClassRunner.class)
+@ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes={Application.class}) // Spring Boot config (includes component scan)
 @Transactional // Enables rollback after each test.
 @ActiveProfiles({"development", "test", "mock"})
@@ -51,8 +51,8 @@ public abstract class MockMvcTest {
 
     private MockMvc mockMvc;
 
-    @Before
-    public void mockMvcSetUp(){
+    @BeforeEach
+    void mockMvcSetUp(){
         this.mockMvc = MockMvcBuilders
                 .webAppContextSetup(this.context)
                 .build();
@@ -65,8 +65,8 @@ public abstract class MockMvcTest {
         );
     }
 
-    @Before
-    public void dbSetup(){
+    @BeforeEach
+    void dbSetup(){
         DbSetup dbSetup = new DbSetup(new DataSourceDestination(dataSource), this.dbSetupOperation());
         dbSetup.launch();
     }

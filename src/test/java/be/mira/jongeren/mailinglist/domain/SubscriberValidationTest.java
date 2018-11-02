@@ -1,17 +1,16 @@
 package be.mira.jongeren.mailinglist.domain;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import javax.validation.ConstraintViolation;
 import java.util.Set;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class SubscriberValidationTest extends BeanValidatorTest {
+class SubscriberValidationTest extends BeanValidatorTest {
 
     @Test
-    public void emailAddressWithCorrectSyntaxIsValid(){
+    void emailAddressWithCorrectSyntaxIsValid(){
         Subscriber subscriber = new Subscriber();
         subscriber.setEmail("luke.skywalker@rebellion.org");
 
@@ -21,7 +20,7 @@ public class SubscriberValidationTest extends BeanValidatorTest {
     }
 
     @Test
-    public void emailAddressWithInvalidSyntaxGivesValidationError(){
+    void emailAddressWithInvalidSyntaxGivesValidationError(){
         Subscriber subscriber = new Subscriber();
         subscriber.setEmail("notvalid");
 
@@ -31,7 +30,7 @@ public class SubscriberValidationTest extends BeanValidatorTest {
     }
 
     @Test
-    public void emailAddressEmptyGivesValidationError(){
+    void emailAddressEmptyGivesValidationError(){
         Subscriber subscriber = new Subscriber();
         subscriber.setEmail("");
 
@@ -41,7 +40,7 @@ public class SubscriberValidationTest extends BeanValidatorTest {
     }
 
     @Test
-    public void emailAddressNullGivesValidationError(){
+    void emailAddressNullGivesValidationError(){
         Subscriber subscriber = new Subscriber();
         subscriber.setEmail(null);
 
@@ -51,7 +50,7 @@ public class SubscriberValidationTest extends BeanValidatorTest {
     }
 
     @Test
-    public void tokenWithLengthEqualTo16IsValid(){
+    void tokenWithLengthEqualTo16IsValid(){
         Subscriber subscriber = new Subscriber("luke@rebellion.org");
         subscriber.setToken("123456789ABCDEFG");
         assertEquals(16, subscriber.getToken().length());
@@ -62,7 +61,7 @@ public class SubscriberValidationTest extends BeanValidatorTest {
     }
 
     @Test
-    public void tokenWithLengthLargerThan16GivesValidationError(){
+    void tokenWithLengthLargerThan16GivesValidationError(){
         Subscriber subscriber = new Subscriber("luke@rebellion.org");
         subscriber.setToken("123456789ABCDEFGH");
 

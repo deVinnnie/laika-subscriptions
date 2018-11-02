@@ -3,23 +3,21 @@ package be.mira.jongeren.mailinglist.repository;
 import be.mira.jongeren.mailinglist.common.MockMvcTest;
 import be.mira.jongeren.mailinglist.domain.SubscriptionEvent;
 import be.mira.jongeren.mailinglist.domain.SubscriptionList;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 import static com.ninja_squad.dbsetup.Operations.insertInto;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class SubscriptionEventRepositoryTest extends MockMvcTest {
+class SubscriptionEventRepositoryTest extends MockMvcTest {
 
     @Autowired
     private SubscriptionEventRepository subscriptionEventRepository;
 
-    @Before
+    @BeforeEach
     public void setUp(){
         dbSetup(
             insertInto("subscription_event")
@@ -32,7 +30,7 @@ public class SubscriptionEventRepositoryTest extends MockMvcTest {
     }
 
     @Test
-    public void findBySubscriptionListReturnsEventsInChronologicalOrder(){
+    void findBySubscriptionListReturnsEventsInChronologicalOrder(){
         SubscriptionList list = new SubscriptionList();
         list.setId(10L);
 
@@ -45,7 +43,7 @@ public class SubscriptionEventRepositoryTest extends MockMvcTest {
     }
 
     @Test
-    public void findTopSubscriptionEventReturnsMostRecent(){
+    void findTopSubscriptionEventReturnsMostRecent(){
         SubscriptionList list = new SubscriptionList();
         list.setId(10L);
 
@@ -54,7 +52,7 @@ public class SubscriptionEventRepositoryTest extends MockMvcTest {
     }
 
     @Test
-    public void findTopSubscriptionEventForListWithNoEntriesGivesNull(){
+    void findTopSubscriptionEventForListWithNoEntriesGivesNull(){
         SubscriptionList list = new SubscriptionList();
         list.setId(20L);
 

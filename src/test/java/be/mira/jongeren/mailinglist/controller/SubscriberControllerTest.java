@@ -4,7 +4,7 @@ import be.mira.jongeren.mailinglist.controllers.SubscriberController;
 import be.mira.jongeren.mailinglist.domain.Subscriber;
 import be.mira.jongeren.mailinglist.repository.SubscriberRepository;
 import be.mira.jongeren.mailinglist.common.MockMvcTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 
@@ -12,11 +12,11 @@ import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.IsEqual.equalTo;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-public class SubscriberControllerTest extends MockMvcTest {
+class SubscriberControllerTest extends MockMvcTest {
 
     @Autowired
     private SubscriberController subscriberController;
@@ -25,7 +25,7 @@ public class SubscriberControllerTest extends MockMvcTest {
     private SubscriberRepository subscriberRepository;
 
     @Test
-    public void addSubscriberAddsNewEntity() throws Exception {
+    void addSubscriberAddsNewEntity() throws Exception {
         mockMvc()
             .perform(
                     post("/")
@@ -47,7 +47,7 @@ public class SubscriberControllerTest extends MockMvcTest {
     }
 
     @Test
-    public void addSubscriberWithExistingEmailGives409() throws Exception {
+    void addSubscriberWithExistingEmailGives409() throws Exception {
         addSubscriberAddsNewEntity();
         mockMvc()
                 .perform(
@@ -64,7 +64,7 @@ public class SubscriberControllerTest extends MockMvcTest {
     }
 
     @Test
-    public void addSubscriberWithoutSubscriptionListsGives400() throws Exception {
+    void addSubscriberWithoutSubscriptionListsGives400() throws Exception {
         mockMvc()
             .perform(
                 post("/")
@@ -82,7 +82,7 @@ public class SubscriberControllerTest extends MockMvcTest {
     }
 
     @Test
-    public void addSubscriberWithoutAnyFieldsFilledInGives400() throws Exception {
+    void addSubscriberWithoutAnyFieldsFilledInGives400() throws Exception {
         mockMvc()
             .perform(
                 post("/")
@@ -92,7 +92,7 @@ public class SubscriberControllerTest extends MockMvcTest {
     }
 
     @Test
-    public void addSubscriberWithoutEmailAddressGives400() throws Exception {
+    void addSubscriberWithoutEmailAddressGives400() throws Exception {
         mockMvc()
             .perform(
                 post("/")
@@ -109,7 +109,7 @@ public class SubscriberControllerTest extends MockMvcTest {
 
 
     @Test
-    public void addSubscriberWithInvalidEmailAddressGives400() throws Exception {
+    void addSubscriberWithInvalidEmailAddressGives400() throws Exception {
         mockMvc()
                 .perform(
                         post("/")
@@ -127,7 +127,7 @@ public class SubscriberControllerTest extends MockMvcTest {
 
 
     @Test
-    public void activateSubscriberWithCorrectTokenChangesState() throws Exception{
+    void activateSubscriberWithCorrectTokenChangesState() throws Exception{
         // Prepare test subscriber.
         Subscriber subscriber = new Subscriber("Luke", "Skywalker", "luke.skywalker@rebellion.org");
         subscriber.setToken("aaaabbbbccccdddd");
@@ -148,7 +148,7 @@ public class SubscriberControllerTest extends MockMvcTest {
     }
 
     @Test
-    public void activateSubscriberWithInCorrectTokenIsRejected() throws Exception{
+    void activateSubscriberWithInCorrectTokenIsRejected() throws Exception{
         // Prepare test subscriber.
         Subscriber subscriber = new Subscriber("Luke", "Skywalker", "luke.skywalker@rebellion.org");
         subscriber.setToken("aaaabbbbccccdddd");
@@ -169,7 +169,7 @@ public class SubscriberControllerTest extends MockMvcTest {
     }
 
     @Test
-    public void activateSubscriberWithTokenSizeLongerThan16IsRejected() throws Exception{
+    void activateSubscriberWithTokenSizeLongerThan16IsRejected() throws Exception{
         // Prepare test subscriber.
         Subscriber subscriber = new Subscriber("Luke", "Skywalker", "luke.skywalker@rebellion.org");
         subscriberRepository.save(subscriber);
@@ -189,7 +189,7 @@ public class SubscriberControllerTest extends MockMvcTest {
     }
 
     @Test
-    public void activateSubscriberWithEmptyTokenIsRejected() throws Exception{
+    void activateSubscriberWithEmptyTokenIsRejected() throws Exception{
         // Prepare test subscriber.
         Subscriber subscriber = new Subscriber("Luke", "Skywalker", "luke.skywalker@rebellion.org");
         subscriberRepository.save(subscriber);
@@ -209,7 +209,7 @@ public class SubscriberControllerTest extends MockMvcTest {
     }
 
     @Test
-    public void unsubscribeRemovesSubscriber() throws Exception{
+    void unsubscribeRemovesSubscriber() throws Exception{
         // Prepare test subscriber.
         Subscriber subscriber = new Subscriber("Luke", "Skywalker", "luke.skywalker@rebellion.org");
         subscriberRepository.save(subscriber);
@@ -228,7 +228,7 @@ public class SubscriberControllerTest extends MockMvcTest {
     }
 
     @Test
-    public void unsubscribeForNonExistantSubscriberGivesRedirect() throws Exception{
+    void unsubscribeForNonExistantSubscriberGivesRedirect() throws Exception{
         mockMvc()
             .perform(
                 post("/unsubscribe/")
@@ -239,7 +239,7 @@ public class SubscriberControllerTest extends MockMvcTest {
     }
 
     @Test
-    public void redirectPageAfterUnsubscribeContainsCallout() throws Exception{
+    void redirectPageAfterUnsubscribeContainsCallout() throws Exception{
         // Prepare test subscriber.
         Subscriber subscriber = new Subscriber("Luke", "Skywalker", "luke.skywalker@rebellion.org");
         subscriberRepository.save(subscriber);

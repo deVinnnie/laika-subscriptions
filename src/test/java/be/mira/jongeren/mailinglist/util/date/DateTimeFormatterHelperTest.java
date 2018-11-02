@@ -1,15 +1,15 @@
 package be.mira.jongeren.mailinglist.util.date;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class DateTimeFormatterHelperTest {
+class DateTimeFormatterHelperTest {
 
     @Test
-    public void shouldReturnDateInCorrectFormat(){
+    void shouldReturnDateInCorrectFormat(){
         DateTimeFormatterHelper dateTimeFormatterHelper = new DateTimeFormatterHelper();
         String formatted = dateTimeFormatterHelper.format(LocalDateTime.of(2017, 03, 05, 10, 55), "YYYY-MM-dd HH:mm");
         assertEquals("2017-03-05 10:55", formatted);

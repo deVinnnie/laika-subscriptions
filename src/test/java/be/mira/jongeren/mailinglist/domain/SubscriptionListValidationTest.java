@@ -1,20 +1,16 @@
 package be.mira.jongeren.mailinglist.domain;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import javax.validation.ConstraintViolation;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class SubscriptionListValidationTest extends BeanValidatorTest{
+class SubscriptionListValidationTest extends BeanValidatorTest{
 
     @Test
-    public void subscriptionListWithTitleIsValid(){
+    void subscriptionListWithTitleIsValid(){
         SubscriptionList subscriptionList = new SubscriptionList();
         subscriptionList.setTitle("main-sequence");
 
@@ -24,7 +20,7 @@ public class SubscriptionListValidationTest extends BeanValidatorTest{
     }
 
     @Test
-    public void subscriptionListWithEmptyTitleGivesValidationErrors(){
+    void subscriptionListWithEmptyTitleGivesValidationErrors(){
         SubscriptionList subscriptionList = new SubscriptionList();
         subscriptionList.setTitle("");
 
@@ -34,7 +30,7 @@ public class SubscriptionListValidationTest extends BeanValidatorTest{
     }
 
     @Test
-    public void subscriptionListWithTitleNullGivesValidationErrors(){
+    void subscriptionListWithTitleNullGivesValidationErrors(){
         SubscriptionList subscriptionList = new SubscriptionList();
         subscriptionList.setTitle(null);
 

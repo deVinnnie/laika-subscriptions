@@ -4,14 +4,14 @@ import be.mira.jongeren.mailinglist.common.MockMvcTest;
 import be.mira.jongeren.mailinglist.domain.Subscriber;
 import be.mira.jongeren.mailinglist.repository.SubscriberRepository;
 import be.mira.jongeren.mailinglist.repository.SubscriptionListRepository;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static com.ninja_squad.dbsetup.Operations.insertInto;
 import static com.ninja_squad.dbsetup.Operations.sequenceOf;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class SubscriberServiceTest extends MockMvcTest{
+class SubscriberServiceTest extends MockMvcTest{
 
     @Autowired
     private SubscriberService subscriberService;
@@ -23,7 +23,7 @@ public class SubscriberServiceTest extends MockMvcTest{
     private SubscriptionListRepository subscriptionListRepository;
 
     @Test
-    public void unsubscribeRemovesSubscriberFromDB(){
+    void unsubscribeRemovesSubscriberFromDB(){
         dbSetup(
             insertInto("subscriber")
                 .columns("id", "voornaam", "achternaam", "email", "active")
@@ -36,7 +36,7 @@ public class SubscriberServiceTest extends MockMvcTest{
     }
 
     @Test
-    public void unsubscribeRemovesSubscriberFromAllSubscriptionLists(){
+    void unsubscribeRemovesSubscriberFromAllSubscriptionLists(){
         dbSetup(
             sequenceOf(
                 insertInto("subscriber")
@@ -56,7 +56,7 @@ public class SubscriberServiceTest extends MockMvcTest{
     }
 
     @Test
-    public void subscribeShouldAddSubscriberToAllLists(){
+    void subscribeShouldAddSubscriberToAllLists(){
         subscriberService.subscribe(
                 new Subscriber("Luke", "Skywalker", "luke@rebellion.org"),
                 new String[]{"supernova", "main-sequence"}
@@ -72,7 +72,7 @@ public class SubscriberServiceTest extends MockMvcTest{
     }
 
     @Test
-    public void multipleSubscribersShouldBeAddedToAllLists(){
+    void multipleSubscribersShouldBeAddedToAllLists(){
         subscriberService.subscribe(
                 new Subscriber("Luke", "Skywalker", "luke@rebellion.org"),
                 new String[]{"supernova", "main-sequence"}

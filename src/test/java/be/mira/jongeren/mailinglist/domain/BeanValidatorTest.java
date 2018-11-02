@@ -1,6 +1,6 @@
 package be.mira.jongeren.mailinglist.domain;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 
 import javax.validation.Validation;
 import javax.validation.Validator;
@@ -40,7 +40,7 @@ public abstract class BeanValidatorTest {
 
     private Validator validator;
 
-    @Before
+    @BeforeEach
     public void beanValidatorSetUp(){
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         this.validator = factory.getValidator();

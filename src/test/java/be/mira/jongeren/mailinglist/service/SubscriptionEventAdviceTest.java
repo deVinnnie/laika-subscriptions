@@ -3,13 +3,14 @@ package be.mira.jongeren.mailinglist.service;
 import be.mira.jongeren.mailinglist.common.MockMvcTest;
 import be.mira.jongeren.mailinglist.domain.SubscriptionEvent;
 import be.mira.jongeren.mailinglist.repository.SubscriptionEventRepository;
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static com.ninja_squad.dbsetup.Operations.insertInto;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class SubscriptionEventAdviceTest extends MockMvcTest {
+class SubscriptionEventAdviceTest extends MockMvcTest {
 
     @Autowired
     private SubscriberService subscriberService;
@@ -19,7 +20,7 @@ public class SubscriptionEventAdviceTest extends MockMvcTest {
 
 
     @Test
-    public void adviceMethodTriggeredByUnsubscribe(){
+    void adviceMethodTriggeredByUnsubscribe(){
         dbSetup(
             insertInto("subscriber")
                 .columns("id", "voornaam", "achternaam", "email", "active")
@@ -38,7 +39,7 @@ public class SubscriptionEventAdviceTest extends MockMvcTest {
     }
 
     @Test
-    public void adviceMethodTriggeredByActivate(){
+    void adviceMethodTriggeredByActivate(){
         dbSetup(
             insertInto("subscriber")
                 .columns("id", "voornaam", "achternaam", "email", "active", "token")

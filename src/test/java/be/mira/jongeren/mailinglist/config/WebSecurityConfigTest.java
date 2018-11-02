@@ -1,20 +1,20 @@
 package be.mira.jongeren.mailinglist.config;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
         properties = {
@@ -22,13 +22,13 @@ import static org.junit.Assert.assertTrue;
                 "consult_password=dummy"
         })
 @ActiveProfiles({"development", "test","mock"})
-public class WebSecurityConfigTest {
+class WebSecurityConfigTest {
 
     @Autowired
     private TestRestTemplate restTemplate;
 
     @Test
-    public void requestOnProtectedPageRedirectsToLoginPage() throws Exception {
+    void requestOnProtectedPageRedirectsToLoginPage() {
         ResponseEntity<String> response = restTemplate.getForEntity("/consult", String.class);
         assertThat(response.getBody(), anyOf(
                 is(nullValue()),
@@ -37,7 +37,7 @@ public class WebSecurityConfigTest {
     }
 
     @Test
-    public void requestOnPublicPageWorksWithoutLogin() throws Exception {
+    void requestOnPublicPageWorksWithoutLogin() {
         ResponseEntity<String> response = restTemplate.getForEntity("/", String.class);
         assertTrue(response.getStatusCode().is2xxSuccessful());
         assertThat(response.getBody(), not(containsString("Please enter your username and password")));

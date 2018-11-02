@@ -32,32 +32,18 @@ tasks.withType(JavaCompile) {
 	options.encoding = 'UTF-8'
 }
 
-tasks.matching {it instanceof Test}.all {
-    testLogging{
-        afterTest { desc, result ->
-            // Display the simple Class name.
-            def match = desc.className =~ /.*\.(\p{Lu}.*)$/
-            def className = match.getAt(0).getAt(1)
-            logger.quiet "[${result.resultType}] ${className} > ${desc.name}"
-        }
+test{
+    useJUnitPlatform()
 
-        afterSuite { desc, result ->
-            // Match the outermost suite
-            if (!desc.parent) {
-                println "Tests run: ${result.testCount} Failures: ${result.failedTestCount} Skipped: ${result.skippedTestCount}"
-            }
-        }
+    dependsOn 'cleanTest'
 
-
-        // Make sure output from
-        // standard out or error is shown
-        // in Gradle output.
-        //showStandardStreams = true
+    testLogging {
+        events "passed", "skipped", "failed"
     }
 }
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '4.7'
+wrapper {
+    gradleVersion = '4.10.2'
 }
 
 // Heroku Stuff
@@ -117,6 +103,9 @@ dependencies {
     testCompile group: 'com.icegreen', name: 'greenmail', version:'1.5.5'
     testCompile group: 'com.ninja-squad', name: 'DbSetup', version:'2.1.0'
     testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version:"${springBootVersion}"
+    //testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.3.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
 
     // Assets Pipeline
     assets('com.bertramlabs.plugins:sass-asset-pipeline:2.14.10'){

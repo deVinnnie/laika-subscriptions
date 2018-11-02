@@ -1,14 +1,13 @@
 package be.mira.jongeren.mailinglist.domain;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class SubscriberTest {
+class SubscriberTest {
 
     @Test
-    public void activateWithCorrectTokenSucceeds(){
+    void activateWithCorrectTokenSucceeds(){
         String token = "abc";
         Subscriber subscriber = new Subscriber();
         subscriber.setToken(token);
@@ -18,7 +17,7 @@ public class SubscriberTest {
     }
 
     @Test
-    public void activateSubscriberWithUnsetTokenFails(){
+    void activateSubscriberWithUnsetTokenFails(){
         Subscriber subscriber = new Subscriber();
         subscriber.activate("abc");
 
@@ -26,7 +25,7 @@ public class SubscriberTest {
     }
 
     @Test
-    public void activateWithTokenNullFails(){
+    void activateWithTokenNullFails(){
         Subscriber subscriber = new Subscriber();
         subscriber.setToken("abc");
         subscriber.activate(null);
@@ -35,7 +34,7 @@ public class SubscriberTest {
     }
 
     @Test
-    public void activateWithEmptyTokenFails(){
+    void activateWithEmptyTokenFails(){
         Subscriber subscriber = new Subscriber();
         subscriber.setToken("");
         subscriber.activate(null);
@@ -44,7 +43,7 @@ public class SubscriberTest {
     }
 
     @Test
-    public void activateSubscriberWithUnsetTokenWithEmptyTokenFails(){
+    void activateSubscriberWithUnsetTokenWithEmptyTokenFails(){
         Subscriber subscriber = new Subscriber();
         subscriber.activate("");
 
@@ -52,7 +51,7 @@ public class SubscriberTest {
     }
 
     @Test
-    public void activateSubscriberWithUnsetTokenWithNulTokenFails() {
+    void activateSubscriberWithUnsetTokenWithNulTokenFails() {
         Subscriber subscriber = new Subscriber();
         subscriber.activate(null);
 

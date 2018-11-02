@@ -1,14 +1,13 @@
 package be.mira.jongeren.mailinglist.mail;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class ActivationMailTemplateTest {
+class ActivationMailTemplateTest {
 
     @Test
-    public void formatAddsTokenToMailBody(){
+    void formatAddsTokenToMailBody(){
         String token = "abcd";
         ActivationMailTemplate mailTemplate = new ActivationMailTemplate();
         String body = mailTemplate.format(token, "");
@@ -16,7 +15,7 @@ public class ActivationMailTemplateTest {
     }
 
     @Test
-    public void formatWithTokenNullGivesNull(){
+    void formatWithTokenNullGivesNull(){
         ActivationMailTemplate mailTemplate = new ActivationMailTemplate();
         String body = mailTemplate.format(null, "");
         assertNull(body);
