@@ -18,7 +18,6 @@ jdk:
 # Skip Install Step
 install: true
 
-before_install: "gradle wrapper"
 script: "./gradlew --stacktrace clean build integrationTest jacocoTestReport coveralls"
 
 notifications:
