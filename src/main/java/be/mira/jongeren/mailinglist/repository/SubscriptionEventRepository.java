@@ -15,6 +15,7 @@ public interface SubscriptionEventRepository extends JpaRepository<SubscriptionE
     @Query(value = "select * from subscription_event s where subscription_list_id = :list order by s.timestamp desc limit 1", nativeQuery = true)
     SubscriptionEvent findTopSubscriptionEvent(@Param("list") SubscriptionList list);
 
-    List<SubscriptionEvent> findBySubscriptionList(SubscriptionList list);
+    @Query(value = "select * from subscription_event s where subscription_list_id = :list order by s.timestamp asc", nativeQuery = true)
+    List<SubscriptionEvent> findBySubscriptionList(@Param("list") SubscriptionList list);
 
 }
