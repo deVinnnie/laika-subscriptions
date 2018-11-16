@@ -25,8 +25,8 @@ ext {
 group = 'be.mira.jongeren'
 version = '1.0-SNAPSHOT'
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+sourceCompatibility = 1.11
+targetCompatibility = 1.11
 
 tasks.withType(JavaCompile) {
 	options.encoding = 'UTF-8'
@@ -141,6 +141,10 @@ assets {
 
     //developmentRuntime can be turned off
     developmentRuntime=false
+}
+
+jacoco {
+    toolVersion = "0.8.2"
 }
 
 jacocoTestReport {
