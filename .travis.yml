@@ -3,30 +3,10 @@ language: java
 jdk:
   - openjdk11
 
-#addons:
-#  chrome: stable
-#
-#before_script:
-#  - "wget http://chromedriver.storage.googleapis.com/2.29/chromedriver_linux64.zip"
-#  - "unzip chromedriver_linux64.zip -d /home/travis/chromedriver/"
-#  - sudo mv chromedriver /usr/local/bin
-#  - sudo chmod a+x /usr/local/bin/chromedriver
-#  - "export DISPLAY=:99.0"
-#  - "sh -e /etc/init.d/xvfb start"
-#  - sleep 3 # give xvfb some time to start
-
 # Skip Install Step
 install: true
 
 script: "./gradlew --stacktrace clean build integrationTest jacocoTestReport coveralls"
-
-notifications:
-  email:
-    recipients:
-      - deVinnnie@users.noreply.github.com
-
-    on_success: change
-    on_failure: always
 
 deploy:
   provider: heroku
