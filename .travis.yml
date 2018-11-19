@@ -6,7 +6,7 @@ jdk:
 # Skip Install Step
 install: true
 
-script: "./gradlew --stacktrace clean build integrationTest jacocoTestReport coveralls"
+script: "./gradlew --stacktrace clean build integrationTest jacocoTestReport" # //coveralls
 
 deploy:
   provider: heroku
