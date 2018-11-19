@@ -1,0 +1,6 @@
+postgres-data/
+.idea/
+migration/
+out/
+.gradle/
+src/
