@@ -8,13 +8,13 @@ import com.ninja_squad.dbsetup.destination.DataSourceDestination
 import geb.junit4.GebReportingTest
 import org.junit.Before
 import org.junit.runner.RunWith
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner
 
+import javax.inject.Inject
 import javax.sql.DataSource
 
 import static com.ninja_squad.dbsetup.Operations.sequenceOf
@@ -28,7 +28,7 @@ abstract class BaseTest extends GebReportingTest{
     @Value('${local.server.port}')
     int port
 
-    @Autowired
+    @Inject
     DataSource dataSource
 
     @Before

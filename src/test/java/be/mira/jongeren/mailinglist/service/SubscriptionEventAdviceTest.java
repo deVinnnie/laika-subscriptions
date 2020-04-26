@@ -5,17 +5,18 @@ import be.mira.jongeren.mailinglist.domain.SubscriptionEvent;
 import be.mira.jongeren.mailinglist.repository.SubscriptionEventRepository;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.inject.Inject;
 
 import static com.ninja_squad.dbsetup.Operations.insertInto;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SubscriptionEventAdviceTest extends MockMvcTest {
 
-    @Autowired
+    @Inject
     private SubscriberService subscriberService;
 
-    @Autowired
+    @Inject
     private SubscriptionEventRepository subscriptionEventRepository;
 
 

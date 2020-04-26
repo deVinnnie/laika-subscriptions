@@ -3,13 +3,14 @@ package be.mira.jongeren.mailinglist.repository;
 import be.mira.jongeren.mailinglist.common.MockMvcTest;
 import be.mira.jongeren.mailinglist.domain.SubscriptionList;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.inject.Inject;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class SubscriptionListRepositoryTest extends MockMvcTest {
 
-    @Autowired
+    @Inject
     private SubscriptionListRepository subscriptionListRepository;
 
 

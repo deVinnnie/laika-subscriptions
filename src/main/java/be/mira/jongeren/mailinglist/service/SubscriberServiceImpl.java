@@ -6,9 +6,9 @@ import be.mira.jongeren.mailinglist.mail.ActivationMailTemplate;
 import be.mira.jongeren.mailinglist.repository.SubscriberRepository;
 import be.mira.jongeren.mailinglist.repository.SubscriptionListRepository;
 import be.mira.jongeren.mailinglist.util.TokenGenerator;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -20,18 +20,18 @@ import java.util.List;
 @Transactional
 public class SubscriberServiceImpl implements SubscriberService {
 
-    @Autowired
+    @Inject
     private SubscriberRepository subscriberRepository;
 
-    @Autowired
+    @Inject
     private SubscriptionListRepository subscriptionListRepository;
 
-    @Autowired
+    @Inject
     private TokenGenerator tokenGenerator;
 
     private MailSender mailSender;
 
-    @Autowired
+    @Inject
     public SubscriberServiceImpl(MailSender mailSender) {
         this.mailSender = mailSender;
     }

@@ -4,24 +4,24 @@ import be.mira.jongeren.mailinglist.domain.SubscriptionList;
 import be.mira.jongeren.mailinglist.repository.SubscriptionEventRepository;
 import be.mira.jongeren.mailinglist.repository.SubscriptionListRepository;
 import be.mira.jongeren.mailinglist.service.MailConfiguration;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import javax.inject.Inject;
 
 @Controller
 @RequestMapping("/consult")
 public class ConsultationController {
 
-    @Autowired
+    @Inject
     private SubscriptionListRepository subscriptionListRepository;
 
-    @Autowired
+    @Inject
     private SubscriptionEventRepository subscriptionEventRepository;
 
-    @Autowired
+    @Inject
     private MailConfiguration mailConfiguration;
 
     @RequestMapping(method= RequestMethod.GET)

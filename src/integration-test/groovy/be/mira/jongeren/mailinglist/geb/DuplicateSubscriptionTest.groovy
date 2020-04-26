@@ -3,7 +3,8 @@ package be.mira.jongeren.mailinglist.geb
 import be.mira.jongeren.mailinglist.repository.SubscriberRepository
 import be.mira.jongeren.mailinglist.geb.pages.SubscriptionCreationPage
 import org.junit.Test
-import org.springframework.beans.factory.annotation.Autowired
+
+import javax.inject.Inject
 
 import static org.junit.Assert.assertEquals
 import static org.junit.Assert.assertTrue
@@ -12,7 +13,7 @@ import static be.mira.jongeren.mailinglist.geb.pages.SubscriptionCreationPage.SU
 
 class DuplicateSubscriptionTest extends BaseTest {
 
-    @Autowired
+    @Inject
     SubscriberRepository subscriberRepository
 
     @Test

@@ -5,8 +5,9 @@ import be.mira.jongeren.mailinglist.domain.Subscriber;
 import be.mira.jongeren.mailinglist.repository.SubscriberRepository;
 import be.mira.jongeren.mailinglist.common.MockMvcTest;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+
+import javax.inject.Inject;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -18,10 +19,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 class SubscriberControllerTest extends MockMvcTest {
 
-    @Autowired
+    @Inject
     private SubscriberController subscriberController;
 
-    @Autowired
+    @Inject
     private SubscriberRepository subscriberRepository;
 
     @Test

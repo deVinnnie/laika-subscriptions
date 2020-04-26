@@ -5,8 +5,8 @@ import be.mira.jongeren.mailinglist.domain.SubscriptionEvent;
 import be.mira.jongeren.mailinglist.domain.SubscriptionList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.inject.Inject;
 import java.util.List;
 
 import static com.ninja_squad.dbsetup.Operations.insertInto;
@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class SubscriptionEventRepositoryTest extends MockMvcTest {
 
-    @Autowired
+    @Inject
     private SubscriptionEventRepository subscriptionEventRepository;
 
     @BeforeEach

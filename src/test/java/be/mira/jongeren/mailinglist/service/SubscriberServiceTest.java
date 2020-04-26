@@ -5,7 +5,8 @@ import be.mira.jongeren.mailinglist.domain.Subscriber;
 import be.mira.jongeren.mailinglist.repository.SubscriberRepository;
 import be.mira.jongeren.mailinglist.repository.SubscriptionListRepository;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.inject.Inject;
 
 import static com.ninja_squad.dbsetup.Operations.insertInto;
 import static com.ninja_squad.dbsetup.Operations.sequenceOf;
@@ -13,13 +14,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class SubscriberServiceTest extends MockMvcTest{
 
-    @Autowired
+    @Inject
     private SubscriberService subscriberService;
 
-    @Autowired
+    @Inject
     private SubscriberRepository subscriberRepository;
 
-    @Autowired
+    @Inject
     private SubscriptionListRepository subscriptionListRepository;
 
     @Test

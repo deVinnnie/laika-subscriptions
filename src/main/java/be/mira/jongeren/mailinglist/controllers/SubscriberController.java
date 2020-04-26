@@ -5,7 +5,6 @@ import be.mira.jongeren.mailinglist.domain.SubscriptionList;
 import be.mira.jongeren.mailinglist.repository.SubscriberRepository;
 import be.mira.jongeren.mailinglist.repository.SubscriptionListRepository;
 import be.mira.jongeren.mailinglist.service.SubscriberService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.inject.Inject;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -20,13 +20,13 @@ import java.util.List;
 @RequestMapping("/")
 public class SubscriberController {
 
-    @Autowired
+    @Inject
     private SubscriberService subscriberService;
 
-    @Autowired
+    @Inject
     private SubscriberRepository subscriberRepository;
 
-    @Autowired
+    @Inject
     private SubscriptionListRepository subscriptionListRepository;
 
     @RequestMapping(method= RequestMethod.GET)

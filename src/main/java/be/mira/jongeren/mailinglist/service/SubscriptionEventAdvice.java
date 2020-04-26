@@ -6,19 +6,19 @@ import be.mira.jongeren.mailinglist.repository.SubscriptionEventRepository;
 import be.mira.jongeren.mailinglist.repository.SubscriptionListRepository;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.inject.Inject;
 import java.util.List;
 
 @Aspect
 @Component
 public class SubscriptionEventAdvice {
 
-    @Autowired
+    @Inject
     private SubscriptionListRepository subscriptionListRepository;
 
-    @Autowired
+    @Inject
     private SubscriptionEventRepository subscriptionEventRepository;
 
     @AfterReturning("execution(* be.mira.jongeren.mailinglist.service.SubscriberService.unsubscribe(..))" +
