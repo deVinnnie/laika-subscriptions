@@ -82,7 +82,7 @@ public class SubscriberController {
         boolean activated = subscriberService.activate(id, token);
 
         if(activated) {
-            redirectAttributes.addFlashAttribute("subscriber", subscriberRepository.getOne(id));
+            redirectAttributes.addFlashAttribute("subscribed_subscriber", subscriberRepository.getOne(id));
             ModelAndView mav = new ModelAndView("redirect:/");
             return mav;
         }

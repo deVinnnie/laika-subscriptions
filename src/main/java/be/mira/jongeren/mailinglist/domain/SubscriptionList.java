@@ -5,10 +5,11 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
 * Collection of all Subscribers interested in this subject.
-* 
+*
 * In practice there will exist two lists, one for each age category:
 * - `main-sequence` : For ages 9 till 14.
 * - `supernova` : For ages 14 till 18 and above.
@@ -40,6 +41,14 @@ public class SubscriptionList extends AbstractEntity{
 
     public void setSubscribers(List<Subscriber> subscribers) {
         this.subscribers = subscribers;
+    }
+
+
+    public String getRawMailAddresses(){
+        return this.getSubscribers()
+            .stream()
+            .map(Subscriber::getEmail)
+            .collect(Collectors.joining(","));
     }
 
     public void remove(Subscriber subscriber){

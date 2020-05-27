@@ -1,0 +1,27 @@
+{{#partial "content" }}
+    <h1>Geschiedenis</h1>
+    <a href="/consult">Terug</a>
+
+    <div id="myDiv" style="width: 100%; height: 400px;">
+        <!-- Plotly chart will be drawn inside this DIV -->
+    </div>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script>
+        var data = [{
+           x: [
+        {{#each subscriptionEvents}}
+            '{{timestamp}}',
+        {{/each}}
+           ],
+           y: [
+        {{#each subscriptionEvents}}
+            {{count}},
+        {{/each}}
+          ],
+          type: 'scatter'
+        }];
+        Plotly.newPlot('myDiv', data);
+    </script>
+{{/partial}}
+
+{{> layouts/base title="MIRA Jeugdkern Mailinglijst"}}

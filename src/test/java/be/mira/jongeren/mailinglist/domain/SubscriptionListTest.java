@@ -67,4 +67,19 @@ class SubscriptionListTest {
 
         assertEquals(1, list.count());
     }
+
+    @Test
+    void getRawMailAddressesGivesCommaSeperatedListOfSubscribersMailAddresses(){
+        SubscriptionList list = new SubscriptionList();
+        luke = new Subscriber("luke@rebellion.org");
+        luke.setActive(true);
+
+        leia = new Subscriber("leia@rebellion.org");
+        leia.setActive(true);
+
+        list.add(luke);
+        list.add(leia);
+
+        assertEquals("luke@rebellion.org,leia@rebellion.org", list.getRawMailAddresses());
+    }
 }

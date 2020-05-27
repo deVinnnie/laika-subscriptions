@@ -1,0 +1,18 @@
+{{#partial "content" }}
+<form class="pure-form pure-form-stacked" action="login" method="POST">
+        <fieldset>
+            <legend>Please enter your username and password</legend>
+
+            <label for="username">Username</label>
+            <input required class="pure-input-1" type="text" name="username" value=""/>
+
+            <label for="password">Password</label>
+            <input required class="pure-input-1" type="password" name="password"/>
+        </fieldset>
+        <input name="_csrf" type="hidden" value="{{_csrf}}"/>
+
+        <button class="pure-button" type="submit">Login</button>
+</form>
+{{/partial}}
+
+{{> layouts/base title="MIRA Jeugdkern Mailinglijst - Login"}}

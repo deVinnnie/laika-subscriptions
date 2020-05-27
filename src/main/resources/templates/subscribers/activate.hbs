@@ -1,0 +1,15 @@
+{{#partial "content" }}
+    <h1>Inschrijving Bevestigen</h1>
+    <p>Kopieer de activatiecode in onderstaand tekstveld.</p>
+
+    <form class="pure-form pure-form-stacked" method="POST">
+        <input name="_csrf" type="hidden" value="{{_csrf}}"/>
+
+        <label for="token">Activatiecode</label>
+        <input id="token" name="token" type="text" required/>
+
+        <button class="pure-button pure-button-primary" type="submit">Bevestigen</button>
+    </form>
+{{/partial}}
+
+{{> layouts/base title="Inschrijving Bevestigen"}}

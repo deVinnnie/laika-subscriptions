@@ -1,0 +1,50 @@
+{{#partial "content" }}
+    {{#if subscribed_subscriber.active}}
+        <div class="callout success">
+            <p>{{subscribed_subscriber.email}} werd toegevoegd aan de mailinglijst.</p>
+        </div>
+    {{/if}}
+
+    <h1>MIRA Jeugdkern Mailinglijst</h1>
+
+    <p>Schrijf je in op onze mailinglijst en dan houden wij je op de hoogte van het doen en laten van de Jeugdkern. Op deze manier mis je geen enkele activiteit!</p>
+
+    <form id="subscription_form" class="pure-form pure-form-stacked" method="POST" action="/">
+        <input name="_csrf" type="hidden" value="{{_csrf}}"/>
+
+        <label class="required" for="email">E-mailadres</label>
+        <input class="pure-input-1" type="email" id="email" value="{{subscriber.email}}" name="email" required/>
+        {{> partials/errors field='email'}}
+
+        <label for="voornaam">Voornaam</label>
+        <input class="pure-input-1" type="text" id="voornaam" value="{{subscriber.voornaam}}" name="voornaam"/>
+        {{> partials/errors field='voornaam'}}
+
+        <label for="achternaam">Achternaam</label>
+        <input class="pure-input-1" type="text" id="achternaam" value="{{subscriber.achternaam}}" name="achternaam"/>
+        {{> partials/errors field='achternaam'}}
+
+        <fieldset>
+            <legend>Kies de activiteiten waarvoor je notificaties wilt ontvangen:</legend>
+            {{> partials/errors field='subscriptions'}}
+
+            {{#each lists}}
+                <div class="pure-controls">
+                    <label class="pure-checkbox" for="list-{{title}}">
+                        <input type="checkbox" id="list-{{title}}" name="lists" value="{{title}}"/>
+                        <span>{{i18n title}}</span>
+                    </label>
+                </div>
+            {{/each}}
+        </fieldset>
+        <button class="pure-button pure-button-primary" type="submit">Inschrijven</button>
+    </form>
+
+    <ul class="hints">
+        <li>Je kan op ieder moment uitschrijven via deze link:
+            <a href="/unsubscribe">Uitschrijven</a>
+        </li>
+    </ul>
+{{/partial}}
+
+{{> layouts/base title="MIRA Jeugdkern Mailinglijst"}}

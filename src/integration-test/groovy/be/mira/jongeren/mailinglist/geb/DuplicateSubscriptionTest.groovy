@@ -29,6 +29,10 @@ class DuplicateSubscriptionTest extends BaseTest {
 
         page.submitButton.click()
 
+        assert page.lastNameInputElement == ""
+        assert page.lastNameInputElement == ""
+        assert page.emailAddressInputElement == ""
+
         // 2. Attempt to sign up with the same e-mailaddress a second time.
         page.firstNameInputElement << "Luke"
         page.lastNameInputElement << "Skywalker"

@@ -1,0 +1,5 @@
+{{#hasFieldErrors bindingResult field=field}}
+    <p class="error">
+        {{i18n (getFieldError bindingResult field=field)}}
+    </p>
+{{/hasFieldErrors}}

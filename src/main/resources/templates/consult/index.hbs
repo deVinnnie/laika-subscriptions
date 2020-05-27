@@ -1,0 +1,46 @@
+{{#partial "content" }}
+    <p>E-mailadres: {{configurationEmail}}</p>
+
+    <script>
+        function copy(id) {
+          var element = document.getElementById(id);
+          var range = document.createRange();
+          range.selectNode(element);
+          window.getSelection().addRange(range);
+          document.execCommand('copy');
+          window.getSelection().empty();
+        }
+    </script>
+    {{#each subscriptionLists}}
+        <h1>{{i18n title }} [{{count}}]</h1>
+        <a class="pure-button" href="/consult/history/{{id}}">Geschiedenis</a>
+        <button class="pure-button" onclick="copy('{{title}}-raw')">Kopieër naar Klembord</button>
+
+        <table class="pure-table pure-table-striped">
+            <thead>
+                <tr>
+                    <th>E-mail</th>
+                    <th>Voornaam</th>
+                    <th>Achternaam</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each subscribers}}
+                    <tr>
+                        <td>{{email}}</td>
+                        <td>{{voornaam}}</td>
+                        <td>{{achternaam}}</td>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
+
+        <pre id="{{title}}-raw">{{rawMailAddresses}}</pre>
+    {{else}}
+        <p>Geen lijsten beschikbaar.</p>
+    {{/each}}
+
+{{/partial}}
+
+{{> layouts/base title="MIRA Jeugdkern Mailinglijst"}}
+
