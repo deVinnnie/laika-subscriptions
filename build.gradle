@@ -3,7 +3,7 @@ plugins {
     id 'groovy'
     id 'jacoco'
     id 'idea'
-    id 'org.springframework.boot' version '2.1.6.RELEASE'
+    id 'org.springframework.boot' version '2.1.18.RELEASE'
     id "com.bertramlabs.asset-pipeline" version '2.15.1'
     id 'com.github.kt3k.coveralls' version '2.8.2'
 }
@@ -17,7 +17,7 @@ jar {
 }
 
 ext {
-    springBootVersion = '2.1.6.RELEASE'
+    springBootVersion = '2.1.18.RELEASE'
     seleniumVersion = '3.12.0'
     gebVersion = "2.1"
 }
@@ -93,8 +93,8 @@ dependencies {
 //    compile 'org.springframework.boot:spring-boot-devtools'
 
     // DB
-    compile group: 'com.h2database', name: 'h2', version:'1.4.197'
-    compile group: 'org.postgresql', name: 'postgresql', version:'42.2.5'
+    compile group: 'com.h2database', name: 'h2', version:'1.4.200'
+    compile group: 'org.postgresql', name: 'postgresql', version:'42.2.18'
 
     // Other
     compile group: 'ro.pippo', name: 'pippo-jade', version:'1.12.0'
@@ -107,18 +107,18 @@ dependencies {
     testCompile group: 'com.icegreen', name: 'greenmail', version:'1.5.5'
     testCompile group: 'com.ninja-squad', name: 'DbSetup', version:'2.1.0'
     testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version:"${springBootVersion}"
-    //testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.3.1'
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
+    //testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.3.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.2'
 
     // Assets Pipeline
     assets('com.bertramlabs.plugins:sass-asset-pipeline:2.14.10'){
         exclude group: 'log4j', module: 'log4j'
     }
-    compile 'com.google.code.gson:gson:2.8.4' // Fixes conflict with Spring-Boot
+    compile 'com.google.code.gson:gson:2.8.6' // Fixes conflict with Spring-Boot
 
     integrationTestCompile group: 'org.seleniumhq.selenium', name: 'selenium-java', version:"${seleniumVersion}"
-    integrationTestCompile  'com.google.code.gson:gson:2.8.5' // Fixes conflict with Spring-Boot
+    integrationTestCompile  'com.google.code.gson:gson:2.8.6' // Fixes conflict with Spring-Boot
 
     // ---------------------------------------------
     // Geb
