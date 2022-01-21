@@ -1,9 +1,11 @@
 package be.mira.jongeren.mailinglist.service;
 
 import be.mira.jongeren.mailinglist.domain.Subscriber;
+import be.mira.jongeren.mailinglist.domain.SubscriptionEvent;
 import be.mira.jongeren.mailinglist.domain.SubscriptionList;
 import be.mira.jongeren.mailinglist.mail.ActivationMailTemplate;
 import be.mira.jongeren.mailinglist.repository.SubscriberRepository;
+import be.mira.jongeren.mailinglist.repository.SubscriptionEventRepository;
 import be.mira.jongeren.mailinglist.repository.SubscriptionListRepository;
 import be.mira.jongeren.mailinglist.util.TokenGenerator;
 import org.springframework.stereotype.Service;
@@ -28,6 +30,9 @@ public class SubscriberServiceImpl implements SubscriberService {
 
     @Inject
     private TokenGenerator tokenGenerator;
+
+    @Inject
+    private SubscriptionEventRepository subscriptionEventRepository;
 
     private MailSender mailSender;
 
@@ -75,6 +80,7 @@ public class SubscriberServiceImpl implements SubscriberService {
         }
 
         subscriberRepository.delete(subscriber);
+        this.generateEvents();
     }
 
     @Override
@@ -85,7 +91,23 @@ public class SubscriberServiceImpl implements SubscriberService {
     public boolean activate(Long id, String token){
         Subscriber subscriber = subscriberRepository.getOne(id);
         subscriber.activate(token);
+
+        this.generateEvents();
+
         return subscriber.isActive();
+    }
+
+    private void generateEvents() {
+        List<SubscriptionList> all = subscriptionListRepository.findAll();
+        for (SubscriptionList list : all) {
+            SubscriptionEvent latestSubscriptionEvent = subscriptionEventRepository.findTopSubscriptionEvent(list);
+
+            // If the count didnt change then don't create a new entry.
+            if(latestSubscriptionEvent == null || list.count() != latestSubscriptionEvent.getCount()){
+                SubscriptionEvent count = new SubscriptionEvent(list, list.count());
+                subscriptionEventRepository.save(count);
+            }
+        }
     }
 
     //<editor-fold desc="Getters & Setters">

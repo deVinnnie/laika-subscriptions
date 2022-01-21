@@ -2,7 +2,9 @@ package be.mira.jongeren.mailinglist.service;
 
 import be.mira.jongeren.mailinglist.common.MockMvcTest;
 import be.mira.jongeren.mailinglist.domain.Subscriber;
+import be.mira.jongeren.mailinglist.domain.SubscriptionEvent;
 import be.mira.jongeren.mailinglist.repository.SubscriberRepository;
+import be.mira.jongeren.mailinglist.repository.SubscriptionEventRepository;
 import be.mira.jongeren.mailinglist.repository.SubscriptionListRepository;
 import org.junit.jupiter.api.Test;
 
@@ -22,6 +24,9 @@ class SubscriberServiceTest extends MockMvcTest{
 
     @Inject
     private SubscriptionListRepository subscriptionListRepository;
+
+    @Inject
+    private SubscriptionEventRepository subscriptionEventRepository;
 
     @Test
     void unsubscribeRemovesSubscriberFromDB(){
@@ -91,5 +96,39 @@ class SubscriberServiceTest extends MockMvcTest{
                             assertEquals(2, subscriptionList.getSubscribers().size());
                         }
                 );
+    }
+
+    @Test
+    void subscriptionEventsAreUpdatedAfterUnsubscribe(){
+        dbSetup(
+            insertInto("subscriber")
+                .columns("id", "voornaam", "achternaam", "email", "active")
+                .values("10", "Luke", "Skywalker", "luke@rebellion.org", "true")
+                .build()
+        );
+
+        subscriberService.unsubscribe(10L);
+
+        // One for each SubscriptionList
+        assertEquals(2, subscriptionEventRepository.count());
+
+        for (SubscriptionEvent count : subscriptionEventRepository.findAll()) {
+            assertEquals(0, count.getCount());
+        }
+    }
+
+    @Test
+    void subscriptionEventsAreUpdatedAfterActivate(){
+        dbSetup(
+            insertInto("subscriber")
+                .columns("id", "voornaam", "achternaam", "email", "active", "token")
+                .values("10", "Luke", "Skywalker", "luke@rebellion.org", "false", "aaaabbbbcccdddd")
+                .build()
+        );
+
+        subscriberService.activate(10L, "aaaabbbbcccdddd");
+
+        // One for each SubscriptionList
+        assertEquals(2, subscriptionEventRepository.count());
     }
 }
