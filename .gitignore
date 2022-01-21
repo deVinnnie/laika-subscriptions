@@ -8,4 +8,4 @@ build/
 .gradle/
 .asscache
 out/
-migration/
+./migration/
