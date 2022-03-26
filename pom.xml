@@ -10,7 +10,7 @@
     <packaging>jar</packaging>
 
     <properties>
-        <spring-boot.version>2.5.9</spring-boot.version>
+        <spring-boot.version>2.5.11</spring-boot.version>
         <selenium.version>3.141.59</selenium.version>
         <geb.version>4.1</geb.version>
 
@@ -73,12 +73,10 @@
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <version>1.4.200</version>
         </dependency>
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>42.2.24</version>
         </dependency>
 
         <dependency>
