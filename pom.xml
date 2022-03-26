@@ -12,7 +12,7 @@
     <properties>
         <spring-boot.version>2.5.11</spring-boot.version>
         <selenium.version>3.141.59</selenium.version>
-        <geb.version>4.1</geb.version>
+        <geb.version>5.1</geb.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -93,13 +93,6 @@
 
         <!-- Test Dependencies -->
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.13.2</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
             <groupId>com.icegreen</groupId>
             <artifactId>greenmail</artifactId>
             <version>1.5.5</version>
@@ -155,11 +148,11 @@
             <scope>test</scope>
         </dependency>
 
-         <dependency>
+        <dependency>
             <groupId>org.gebish</groupId>
-            <artifactId>geb-junit4</artifactId>
+            <artifactId>geb-junit5</artifactId>
             <version>${geb.version}</version>
-             <scope>test</scope>
+            <scope>test</scope>
         </dependency>
         <!-- / -->
 

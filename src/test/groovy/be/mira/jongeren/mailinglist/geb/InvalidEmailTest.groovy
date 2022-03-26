@@ -2,13 +2,13 @@ package be.mira.jongeren.mailinglist.geb
 
 import be.mira.jongeren.mailinglist.geb.pages.SubscriptionCreationPage
 import be.mira.jongeren.mailinglist.repository.SubscriberRepository
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 import javax.inject.Inject
 
 import static be.mira.jongeren.mailinglist.geb.pages.SubscriptionCreationPage.SUBSCRIPTIONLIST_MAIN_SEQUENCE
-import static org.junit.Assert.assertEquals
-import static org.junit.Assert.assertTrue
+import static org.junit.jupiter.api.Assertions.assertEquals
+import static org.junit.jupiter.api.Assertions.assertTrue
 
 class InvalidEmailTest extends BaseTest {
 

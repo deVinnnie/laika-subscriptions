@@ -2,12 +2,12 @@ package be.mira.jongeren.mailinglist.geb
 
 import be.mira.jongeren.mailinglist.repository.SubscriberRepository
 import be.mira.jongeren.mailinglist.geb.pages.SubscriptionCreationPage
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 import javax.inject.Inject
 
-import static org.junit.Assert.assertEquals
-import static org.junit.Assert.assertTrue
+import static org.junit.jupiter.api.Assertions.assertEquals
+import static org.junit.jupiter.api.Assertions.assertTrue
 
 import static be.mira.jongeren.mailinglist.geb.pages.SubscriptionCreationPage.SUBSCRIPTIONLIST_MAIN_SEQUENCE
 

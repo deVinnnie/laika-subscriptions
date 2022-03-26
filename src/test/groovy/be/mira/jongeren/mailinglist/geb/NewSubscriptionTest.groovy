@@ -4,11 +4,12 @@ import be.mira.jongeren.mailinglist.domain.Subscriber
 import be.mira.jongeren.mailinglist.geb.pages.SubscriptionCreationPage
 import be.mira.jongeren.mailinglist.repository.SubscriberRepository
 import be.mira.jongeren.mailinglist.repository.SubscriptionEventRepository
-import org.junit.Test
+import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 
-import static org.junit.Assert.assertEquals
-import static org.junit.Assert.assertTrue
+import static org.junit.jupiter.api.Assertions.assertEquals
+import static org.junit.jupiter.api.Assertions.assertTrue
+
 
 /**
  * be.mira.jongeren.mailinglist.geb.Test for the green path scenario.
