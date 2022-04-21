@@ -10,7 +10,7 @@
     <packaging>jar</packaging>
 
     <properties>
-        <spring-boot.version>2.5.12</spring-boot.version>
+        <spring-boot.version>2.5.13</spring-boot.version>
         <selenium.version>3.141.59</selenium.version>
         <geb.version>5.1</geb.version>
 
